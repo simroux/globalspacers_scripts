@@ -1,0 +1,30 @@
+DATA_env_broad_scale	3
+DATA_env_local_scale	3
+DATA_env_medium	3
+DATA_Env_Package	3
+	
+DATA_air environmental package	2
+DATA_built environment environmental package	2
+DATA_humam oral environmental package	2
+DATA_human associated environmental package	2
+DATA_human-associated environmental package	2
+DATA_human gut environmental package	2
+DATA_human-gut environmental package	2
+DATA_human oral environmental package	2
+DATA_human skin environmental package	2
+DATA_human vaginal environmental package	2
+DATA_soil environmental package	2
+DATA_wastewater/sludge environmental package	2
+DATA_water environmental package	2
+DATA_microbial mat/biofilm environmental package	2
+DATA_plant-associated environmental package	2
+DATA_sediment environmental package	2
+	
+Package	2
+	
+DATA_sample comment	1
+DATA_host	1
+DATA_isolation_source	1
+DATA_Organism	1
+DATA_Descr	1
+Title	1

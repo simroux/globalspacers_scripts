@@ -1,0 +1,40 @@
+Air;Other
+Algae-associated;Other
+Animal-associated;Digestive system
+Aquatic;Deep_subsurface
+Aquatic;Freshwater
+Aquatic;Marine
+Aquatic;Non-marine_Saline_and_Alkaline
+Aquatic;Other
+Aquatic;Sediment
+Aquatic;Thermal_springs
+Birds-associated;Digestive system
+Birds-associated;Other
+Ecosystem
+Engineered;Bioreactor
+Engineered;Food production
+Engineered;Modeled
+Engineered;Other
+Engineered;Wastewater
+Fish-associated;Other
+Fossil;Other
+Fungi-associated;Other
+Human-associated;Digestive system
+Human-associated;Other
+Human-associated;Respiratory system
+Human-associated;Skin
+Invertebrates-associated;Digestive system
+Invertebrates-associated;Other
+MAG;Other
+Mammals-associated;Digestive system
+Mammals-associated;Other
+Microbial-associated;Other
+Other;Other
+Plants-associated;Other
+Plants-associated;Peat moss
+Plants-associated;Roots
+Terrestrial;Other
+Terrestrial;Soil
+Terrestrial;Wetlands
+Unknown;Other
+Unknown;Unknown

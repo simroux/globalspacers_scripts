@@ -1,0 +1,35 @@
+Eco_base	Eco_sum
+Air;Other	Other
+Animal-associated;Digestive system	Animal-associated
+Animal-associated;Other	Animal-associated
+Aquatic;Deep_subsurface	Aquatic_Other
+Aquatic;Freshwater	Aquatic_Freshwater
+Aquatic;Marine	Aquatic_Marine
+Aquatic;Non-marine_Saline_and_Alkaline	Aquatic_Other
+Aquatic;Other	Aquatic_Other
+Aquatic;Sediment	Aquatic_Sediment
+Aquatic;Thermal_springs	Aquatic_Thermal-springs
+Birds-associated;Digestive system	Animal-associated
+Birds-associated;Other	Animal-associated
+Engineered;Bioreactor	Engineered
+Engineered;Food production	Engineered
+Engineered;Other	Engineered
+Engineered;Wastewater	Engineered
+Exclude;Other	
+Fish-associated;Other	Animal-associated
+Fossil;Other	Other
+Fungi-associated;Other	Other
+Human-associated;Digestive system	Human-associated_Digestive-system
+Human-associated;Other	Human-associated_Other
+Human-associated;Respiratory system	Human-associated_Other
+Human-associated;Skin	Human-associated_Other
+Invertebrates-associated;Other	Animal-associated
+Mammals-associated;Digestive system	Animal-associated
+Mammals-associated;Other	Animal-associated
+Microbial-associated;Other	Other
+Plants-associated;Other	Terrestrial_Soil_and_plants
+Plants-associated;Roots	Terrestrial_Soil_and_plants
+Terrestrial;Other	Terrestrial_Soil_and_plants
+Terrestrial;Soil	Terrestrial_Soil_and_plants
+Terrestrial;Wetlands	Terrestrial_Soil_and_plants
+Unknown;Unknown	Unknown
