@@ -1,0 +1,6 @@
+## In duckdb
+### Warning - this query needs a lot of memory
+# for IMG/VR
+COPY (SELECT ecosystem as virus_ecosystem, ecosystem_sum as spacer_ecosystem, count(*) as n_observation FROM (SELECT DISTINCT ecosystem, target_id, cluster_id, ecosystem_sum FROM imgvr_info, sample_tbl, (SELECT target_id, imgvr_hits_filt.cluster_id as cluster_id, library FROM imgvr_hits_filt, spacer_hits_imgvr WHERE imgvr_hits_filt.cluster_id=spacer_hits_imgvr.cluster_id) as tmp WHERE imgvr_info.uvig=tmp.target_id AND tmp.library=sample_tbl.library) GROUP BY ecosystem, ecosystem_sum) TO 'link_by_ecosystem.tsv' (HEADER, DELIMITER '\t');
+# for IMG/PR
+COPY (SELECT ecosystem_summary as plasmid_ecosystem, ecosystem_sum as spacer_ecosystem, count(*) as n_observation FROM (SELECT DISTINCT ecosystem_summary, target_id, cluster_id, ecosystem_sum FROM imgpr_info, sample_tbl, (SELECT target_id, imgpr_hits_filt.cluster_id as cluster_id, library FROM imgpr_hits_filt, spacer_hits_imgpr WHERE imgpr_hits_filt.cluster_id=spacer_hits_imgpr.cluster_id) as tmp WHERE imgpr_info.full_plasmid_id=tmp.target_id AND tmp.library=sample_tbl.library) GROUP BY ecosystem_summary, ecosystem_sum) TO 'link_by_ecosystem-pr.tsv' (HEADER, DELIMITER '\t');

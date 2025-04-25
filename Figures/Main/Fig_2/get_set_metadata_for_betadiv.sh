@@ -1,0 +1,4 @@
+CREATE OR REPLACE VIEW spacer_cover AS SELECT cluster_id, SUM(spacer_coverage) as total_coverage, crispr_array, sra_run FROM spacer_filt_clusters sc, spacer_filt_tbl st, sample_tbl as sp WHERE st.spacer_id==sc.spacer_id AND st.library==sp.library GROUP BY cluster_id,crispr_array,sra_run;
+# Create a massive table that will be used for redundancy of CRISPR spacer sets
+# We get the list of spacer clusters per repeat per sample, order by repeat
+COPY (SELECT cluster_id, crispr_array, count(sra_run) as n_sample, sum(singleton) as n_singleton, list(sra_run) as list_sample FROM (SELECT cluster_id, crispr_array, sra_run, CASE WHEN total_coverage > 1 THEN 0 ELSE 1 END as singleton FROM spacer_cover) GROUP BY cluster_id, crispr_array ORDER BY crispr_array) TO 'spacer_clusters_and_metadata.tsv' (HEADER, DELIMITER '\t');

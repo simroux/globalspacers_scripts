@@ -1,0 +1,9 @@
+## In DuckDB:
+# For IMG/VR
+COPY(SELECT cluster_id, COUNT(DISTINCT(votu)) as n_votu FROM (SELECT cluster_id, target_id FROM imgvr_hits_filt) AS tmp1 JOIN (SELECT uvig, votu FROM imgvr_info) AS tmp2 ON tmp1.target_id=tmp2.uvig GROUP BY cluster_id) TO 'n_votu_by_cluster.tsv' (HEADER, DELIMITER '\t');
+# Same but with only HQ, because in some cases the total vOTUs counts may be over-inflated (i.e. multiple vOTUs due to fragmented assembly leading to non-overlapping contigs being clustered into different vOTUs, despite originating from the same genome)
+COPY(SELECT cluster_id, COUNT(DISTINCT(votu)) as n_votu FROM (SELECT cluster_id, target_id FROM imgvr_hits_filt) AS tmp1 JOIN (SELECT uvig, votu FROM imgvr_info WHERE quality='High-quality' OR quality='Reference') AS tmp2 ON tmp1.target_id=tmp2.uvig GROUP BY cluster_id) TO 'n_votu_by_cluster_hqonly.tsv' (HEADER, DELIMITER '\t');
+# For IMG/PR
+COPY(SELECT cluster_id, COUNT(DISTINCT(ptu)) as n_ptu FROM (SELECT cluster_id, target_id FROM imgpr_hits_filt) AS tmp1 JOIN (SELECT full_plasmid_id, ptu FROM imgpr_info) AS tmp2 ON tmp1.target_id=tmp2.full_plasmid_id GROUP BY cluster_id) TO 'n_ptu_by_cluster_imgpr.tsv' (HEADER, DELIMITER '\t');
+# As for IMG/VR, we also make a verison with only compelte and near-complete plasmids
+COPY(SELECT cluster_id, COUNT(DISTINCT(ptu)) as n_ptu FROM (SELECT cluster_id, target_id FROM imgpr_hits_filt) AS tmp1 JOIN (SELECT full_plasmid_id, ptu FROM imgpr_info WHERE putatively_complete='Yes') AS tmp2 ON tmp1.target_id=tmp2.full_plasmid_id GROUP BY cluster_id) TO 'n_ptu_by_cluster_imgpr_completeonly.tsv' (HEADER, DELIMITER '\t');

@@ -25,3 +25,8 @@ At this step, we filter some runs based on their sequencing characteristics (e.g
 ## Step 3 - prepare the database file
 `prep_for_db.pl`
 We put the final touches to our sample table, including (i) verifying that we have sample information for all spacers we will have in the database, (ii) excluding a few more samples (the ones with ecosystem "Exclude"), and (iii) adding the summarized ecosystem type in addition to the "full" ecosystem type
+
+# Additional analyses
+## Identify potential time series, i.e. sets of samples obtained from a single individual (for host-associated microbiomes) or the same location (for environmental microbiomes)
+`identify_best_time_series.pl`
+Here we identify the series of metagenomes that may represent time series, and we create the folder structure that will help us create separate files for each "time series".

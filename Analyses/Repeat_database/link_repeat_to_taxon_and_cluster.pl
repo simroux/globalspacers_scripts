@@ -11,7 +11,7 @@ GetOptions ('help' => \$h, 'h' => \$h);
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to link repeat to cluster and to taxon (as much as possible)
 # Arguments :
-# toto
+# none
 ";
 	die "\n";
 }
@@ -453,4 +453,20 @@ sub get_lca(){
 	}
 	chop($lca);
 	return $lca;
+}
+
+sub run_cmd {
+	my $cmd=$_[0];
+	if ($_[1] ne "veryquiet"){print "$cmd\n";}
+	if ($_[1] ne "dummy"){
+		my $out=`$cmd`;
+		if ($_[1] ne "quiet" && $_[1] ne "veryquiet"){
+			if ($_[1] eq "stderr"){print STDERR "$out\n";}
+			else{print "$out\n";}
+		}
+		return($out);
+	}
+	else{
+		print " ### dummy run\n";
+	}
 }

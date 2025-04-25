@@ -1,0 +1,4 @@
+# How-to - reconstruct panels of Fig. S10
+First, the number of observation for each ecosystem combination needs to be extracted from DuckDb (see `export_ecosystem_from_duckdb.sh`). This will generate two files, "link_by_ecosystem.tsv" and "link_by_ecosystem-pr.tsv", that will include these counts for pairs of ecosystems. Next, use `get_heatmap_input.pl` to add a column with the percentage of observations (could also do in DuckDB technically, but DuckDB already needs a lot of memory for these queries). 
+
+We now have all the files we need to draw the plots of Fig. S10 in R, as detailed in `plot_hits.R`. The top two rows of plots are based on the same input file as Fig. 3. The bottom row is based is based on the new files "vr_ecosystem_heatmap.tsv" and "pr_ecosystem_heatmap.tsv" we just generated.  
