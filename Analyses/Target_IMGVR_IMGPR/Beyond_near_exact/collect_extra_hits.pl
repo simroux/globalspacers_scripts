@@ -3,11 +3,10 @@ use strict;
 use autodie;
 use Getopt::Long;
 use Cwd;
-use Custom::Utils;
 my $h=0;
 my $tag_plasmid=0;
 my $tag_multitaxa=0;
-GetOptions ('help' => \$h, 'h' => \$h, 'p'=>\$tag_plasmid, 'm'=>\$tag_multitaxa); # , 'i=s'=>\$in_file, 'r=s'=>\$out_dir_root);
+GetOptions ('help' => \$h, 'h' => \$h, 'p'=>\$tag_plasmid, 'm'=>\$tag_multitaxa); 
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
     print "# Script to get the table of additional spacer hits for cases with substantial targeting, to be loaded later in duckdb
 # Arguments :

@@ -9,7 +9,7 @@ GetOptions ('help' => \$h, 'h' => \$h, 'b=s'=>\$batch_n);
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
     print "# Script to cluster high-quality spacers at 95% (or 80%) for each set
 # Arguments :
-# none
+# run
 ";
     die "\n";
 }

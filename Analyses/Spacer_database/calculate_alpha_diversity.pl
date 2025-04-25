@@ -5,7 +5,7 @@ use Getopt::Long;
 use Cwd;
 my $h=0;
 my $tag_md10=0;
-GetOptions ('help' => \$h, 'h' => \$h, 'm'=>\$tag_md10); # , 'i=s'=>\$in_file, 'r=s'=>\$out_dir_root);
+GetOptions ('help' => \$h, 'h' => \$h, 'm'=>\$tag_md10); 
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to calculate alpha and beta diversity per array
 # Arguments :

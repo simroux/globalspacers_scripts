@@ -7,6 +7,7 @@ library(RColorBrewer)
 library(grid)
 library(gridExtra)
 library(gggenomes)
+source("../../color_scales.R")
 blank_theme<-theme(axis.line=element_blank(),panel.background=element_rect(linewidth=1,colour="black",fill="white"),legend.position="right",panel.grid.major=element_blank(),panel.grid.minor=element_blank(),text=element_text(color="black",size=8,family="Source Sans 3"),axis.ticks=element_line(color="black"),axis.text=element_text(color="black",size=8,family="Source Sans 3"),legend.key.size = unit(1,"line"))
 
 ### Choice of UViG

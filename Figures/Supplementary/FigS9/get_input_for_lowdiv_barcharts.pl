@@ -5,11 +5,11 @@ use Getopt::Long;
 use Cwd;
 my $h=0;
 my %translate_level=("d"=>"domain","p"=>"phylum","c"=>"class","o"=>"order","f"=>"family","g"=>"genus","s"=>"species");
-GetOptions ('help' => \$h, 'h' => \$h); # , 'i=s'=>\$in_file, 'r=s'=>\$out_dir_root);
+GetOptions ('help' => \$h, 'h' => \$h); 
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to make some counts of each type of set (based on alphadiv)
 # Arguments :
-# none
+# run
 ";
 	die "\n";
 }

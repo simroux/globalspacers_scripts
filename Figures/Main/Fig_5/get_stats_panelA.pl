@@ -3,16 +3,12 @@ use strict;
 use autodie;
 use Getopt::Long;
 use Cwd;
-use Custom::Utils;
-# use Parallel::ForkManager;
 my $h=0;
-# my $in_file;
-# my $out_dir_root="Results/";
-GetOptions ('help' => \$h, 'h' => \$h); # , 'i=s'=>\$in_file, 'r=s'=>\$out_dir_root);
+GetOptions ('help' => \$h, 'h' => \$h); 
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
     print "# Script to get the numbers for an overview of virus targeting by multiple taxa
 # Arguments :
-# toto
+# run
 ";
     die "\n";
 }

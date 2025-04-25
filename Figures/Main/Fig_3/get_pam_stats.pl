@@ -9,7 +9,7 @@ GetOptions ('help' => \$h, 'h' => \$h);
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to get some numbers about PAM detection across VR and PR 
 # Arguments :
-# toto
+# run
 ";
 	die "\n";
 }

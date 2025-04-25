@@ -3,7 +3,6 @@ use strict;
 use autodie;
 use Getopt::Long;
 use Cwd;
-use Custom::Utils;
 my $h=0;
 my $in_file;
 my $selected_array;

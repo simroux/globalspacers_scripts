@@ -3,10 +3,9 @@ use strict;
 use autodie;
 use Getopt::Long;
 use Cwd;
-use Custom::Utils;
 my $h=0;
 my $uvig_id="";
-GetOptions ('help' => \$h, 'h' => \$h, 'i=s'=>\$uvig_id); # , 'i=s'=>\$in_file, 'r=s'=>\$out_dir_root);
+GetOptions ('help' => \$h, 'h' => \$h, 'i=s'=>\$uvig_id); 
 if ($h==1 || $ARGV[0] eq "" || $uvig_id eq ""){ # If asked for help or did not set up any argument
     print "# Script to get the input file for gggenomes
 # Arguments :

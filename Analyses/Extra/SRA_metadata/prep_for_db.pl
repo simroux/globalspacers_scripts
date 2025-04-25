@@ -8,7 +8,7 @@ GetOptions ('help' => \$h, 'h' => \$h);
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to prepare the table of runs for the database
 # Arguments :
-# none
+# run
 ";
 	die "\n";
 }

@@ -1,4 +1,4 @@
-# How-to - reconstruct panels of Fig. 1
+# How-to - reconstruct panels of Fig. 5
 ## Notes
 Some parts of panels A and B are schematics drawn separately. Data underlying panel C are further detailed in Fig. S15 and Fig. S16.
 ## Data pre-processing
@@ -14,6 +14,10 @@ The left part are schematics drawn separately.
 For the right part, the input file "Multitaxa_features.tsv" can be generated with `./get_stats_panelB.pl run`, and the figure is plotted in R using the code in `plot_multitaxa.R`.  
 ### Panels C and D
 Panels C and D are based on the analysis of virus sequences from previous studies in which possible broad targeting (i.e. targeting by phylogenetically distinct hosts) was observed. Some of these virus sequences are not in IMG/VR, so we need to identify and post-process spacer hits to these viruses, as illustrated in "Analyses/Target_Custom_datasets/".  
-Next
-XXX WE NEED TO MAKE SCRIPTS TO PREPARE THE NETWORKS FOR EACH PANEL, BASED ON THE LIST OF VIRUSES IN EACH PANEL XXX
+Next, we prepare the input files for each panel as follows:
+```
+./fig_prep_cover_for_network.pl -p c
+./fig_prep_cover_for_network.pl -p d
+```
+This will create input files for edges and nodes for each panel in folders named "panel_c" and "panel_d", that can then be imported in Cytoscape for visualization. 
 

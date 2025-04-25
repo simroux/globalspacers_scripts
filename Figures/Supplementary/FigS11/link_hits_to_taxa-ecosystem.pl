@@ -3,7 +3,6 @@ use strict;
 use autodie;
 use Getopt::Long;
 use Cwd;
-use Custom::Utils;
 my $h=0;
 GetOptions ('help' => \$h, 'h' => \$h);
 if ($h==1 || $ARGV[0] eq ""){

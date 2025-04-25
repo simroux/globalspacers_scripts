@@ -1,7 +1,6 @@
 #!/usr/bin/env perl
 use strict;
 use autodie;
-use Custom::Utils;
 use Getopt::Long;
 my $h='';
 my $cmd='';
@@ -11,7 +10,7 @@ GetOptions ('help' => \$h, 'h' => \$h);
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to link repeat to cluster and to taxon (as much as possible)
 # Arguments :
-# none
+# run
 ";
 	die "\n";
 }
@@ -185,7 +184,7 @@ foreach my $rep (sort keys %selected_rep){
 close $sf;
 
 
-sub process_first_step{
+sub process_first_step(){
 	my %tmp=%{$_[0]};
 	my $s1=$_[1];
 	my $s2=$_[2];

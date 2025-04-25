@@ -9,7 +9,7 @@ GetOptions ('help' => \$h, 'h' => \$h);
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	print "# Script to prepare a file for some distribution of spacer coverage for a subsample of spacer sets
 # Arguments :
-# none
+# run
 ";
 	die "\n";
 }

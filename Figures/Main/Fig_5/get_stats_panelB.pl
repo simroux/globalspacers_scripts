@@ -3,12 +3,8 @@ use strict;
 use autodie;
 use Getopt::Long;
 use Cwd;
-use Custom::Utils;
-# use Parallel::ForkManager;
 my $h=0;
-# my $in_file;
-# my $out_dir_root="Results/";
-GetOptions ('help' => \$h, 'h' => \$h); # , 'i=s'=>\$in_file, 'r=s'=>\$out_dir_root);
+GetOptions ('help' => \$h, 'h' => \$h); 
 if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
     print "# Script to get the different features of viruses targeted by multiple taxa
 # Arguments :
@@ -20,7 +16,6 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 my $info_virus_file="../../../Data/Spacer_db/IMGVR_sequence_information_Oct17.tsv";
 my $in_file_multiclass="List_of_interest.tsv";
 my $out_file="Multitaxa_features.tsv";
-
 
 my %info_virus;
 print "Reading $info_virus_file ..\n";
@@ -43,7 +38,6 @@ while(<$tsv>){
         $info_virus{$tab[0]}{"acr"}=$tab[14];
         if ($tab[15] eq ""){$tab[15]="no";}
         $info_virus{$tab[0]}{"dgr"}=$tab[15];
-        # $info_virus{$tab[0]}{"taxo"}=$tab[6];
     }
 }
 close $tsv;
