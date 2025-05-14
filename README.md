@@ -18,3 +18,6 @@ The scripts are a mix of Perl, Python, R, bash, and SQL queries executed in Duck
 ## Connected resources
 * The tool [SpacerExtractor](https://code.jgi.doe.gov/SRoux/spacerextractor) allows users to mine their own metagenome (short reads) for CRISPR spacers, as well as matching (large) spacer databases to (large) databases of potential targets.
 * A [companion website](https://spacers.jgi.doe.gov) provides access to a streamlined version of the spacer databases, and detailed examples for how to interrogate the database and extract e.g. information on spacers associated with a specific taxon or matching a specific target. **This is the recommended way to interact with the data for any new analysis or query**.
+
+## Questions/Issues
+* Found a bug, or have a question ? Please open an [issue](https://github.com/simroux/globalspacers_scripts/issues) in this repository ! 
