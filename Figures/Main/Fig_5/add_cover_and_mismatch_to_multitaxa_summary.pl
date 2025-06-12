@@ -17,7 +17,7 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 my %levels=("0"=>"domain","1"=>"phylum","2"=>"class","3"=>"order","4"=>"family","5"=>"genus","6"=>"species");
 
 my $virus_info="../../../Data/Spacer_db/IMGVR_sequence_information_Oct17.tsv";
-my $in_file="Target_to_array.tsv";
+my $in_file="Target_to_repeat.tsv";
 my $summary_file="Summary_multitaxa.tsv";
 my @profile_files=("../../../Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/Virus_to_array_hits_profile-10_hits_with_cc.tsv","../../../Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/Multitaxa_virus_to_array_hits_profile.with_cc.tsv");
 my @cover_files=("../../../Analyses/Target_IMGVR_IMGPR/Target_coverage/uvig_hq_coverage_by_spacer-with_sp_info.tsv","../../../Analyses/Target_IMGVR_IMGPR/Target_coverage/uvigadditional_multitaxa_coverage_by_spacer-with_sp_info.tsv");

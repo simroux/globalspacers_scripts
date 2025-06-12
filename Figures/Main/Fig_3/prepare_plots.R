@@ -150,6 +150,40 @@ df_sp_typ_hit_plot$value <- factor(df_sp_typ_hit_plot$value,ordered=T,levels=c("
 ggplot(df_sp_typ_hit_plot) + geom_bar(aes(x=value,y=count,fill=type),col="black",stat="identity",position="fill") + blank_theme + coord_flip() + scale_y_continuous(labels=scales::percent) + scale_fill_manual(values=hit_type_scale) + theme(legend.position="none") + ylab("Percentage of spacers") + xlab("Spacer/Array/Ecosystem type")  
 ggsave("Panel_C_spacer_type_ecosystem.pdf",width=4,height=2.25)
 
+## Confirming that these are significantly different between rare and either common
+for_test <- df_sp_typ_hit %>%
+  filter((category=="sp_alpha" & value=="rare") | (category=="sp_alpha_and_beta" & (value=="common_multi_sample" | value=="common_single_sample"))) %>%
+  mutate(type = case_when(type == "none" ~ "none", type == "pr" ~ "hit", type == "vr" ~ "hit", type == "vr_and_pr" ~ "hit")) %>%
+  group_by(value,type) %>%
+  summarise(obs = sum(count)) %>%
+  mutate(total = sum(obs)) %>%
+  filter(type=="hit")
+
+prop.test(x = c(for_test[for_test$value=="rare",]$obs, for_test[for_test$value=="common_single_sample",]$obs),
+          n = c(for_test[for_test$value=="rare",]$total, for_test[for_test$value=="common_single_sample",]$total),
+          correct = FALSE)
+prop.test(x = c(for_test[for_test$value=="rare",]$obs, for_test[for_test$value=="common_multi_sample",]$obs),
+          n = c(for_test[for_test$value=="rare",]$total, for_test[for_test$value=="common_multi_sample",]$total),
+          correct = FALSE)
+prop.test(x = c(for_test[for_test$value=="common_single_sample",]$obs, for_test[for_test$value=="common_multi_sample",]$obs),
+          n = c(for_test[for_test$value=="common_single_sample",]$total, for_test[for_test$value=="common_multi_sample",]$total),
+          correct = FALSE)
+
+## And same for human vs other ecosystem
+for_test <- df_sp_typ_hit %>%
+  filter(category=="eco") %>%
+  mutate(value=case_when(value=="Human-associated_Digestive-system" ~ "Human", value=="Human-associated_Other" ~ "Human", value=="mixed" ~ "none", .default="Other"))  %>%
+  mutate(type = case_when(type == "none" ~ "none", type == "pr" ~ "hit", type == "vr" ~ "hit", type == "vr_and_pr" ~ "hit")) %>%
+  group_by(value,type) %>%
+  summarise(obs = sum(count)) %>%
+  mutate(total = sum(obs)) %>%
+  filter(type=="hit")
+
+prop.test(x = c(for_test[for_test$value=="Human",]$obs, for_test[for_test$value=="Other",]$obs),
+          n = c(for_test[for_test$value=="Human",]$total, for_test[for_test$value=="Other",]$total),
+          correct = FALSE)
+
+
 ## Panel D - Number of distinct high-quality vOTU per spacer
 df_dist_nvotu <- read.delim("multihit_votu_totaldistrib_hqonly.tsv",stringsAsFactors = T)
 df_dist_nvotu$category <- factor(df_dist_nvotu$category,ordered=T,levels=unique(df_dist_nvotu$category))

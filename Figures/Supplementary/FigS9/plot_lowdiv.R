@@ -40,24 +40,27 @@ dev.off()
 ### Also stats tests
 df_lowdiv_fortest<-read.delim("all_counts.Jan3.tsv")
 df_lowdiv_fortest <- df_lowdiv_fortest %>%
-  filter(!is.na(n_lowdiv))
+  filter(!is.na(n_lowdiv)) %>%
+  filter(sampled=="complete")
 ref <- df_lowdiv_fortest[1,]
 df_result <- data.frame(ref)
-df_result$ztestless <- "NA"
-df_result$ztestgreat <- "NA"
-df_result$ztesttwosided <- "NA"
+df_result$ztestless <- NA
+df_result$ztestgreat <- NA
+df_result$ztesttwosided <- NA
 for (i in 2:nrow(df_lowdiv_fortest)){
   print(i)
   vec <- df_lowdiv_fortest[i,]
   print(vec)
-  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs), alternative="less")
+  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs), correct = FALSE, alternative="less")
   vec$ztestless <- test$p.value
-  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs), alternative="greater")
+  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs), correct = FALSE, alternative="greater")
   vec$ztestgreat <- test$p.value
   test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs))
   vec$ztesttwosided <- test$p.value
   df_result<-rbind(df_result,vec)
 }
+df_result
+df_result[df_result$ztestgreat>1e-10 & df_result$ztestless>1e-10,]
 write.table(df_result,file="all_counts.Jan3.with_test.tsv",quote=FALSE,sep="\t",row.names=FALSE)
 ## Middle panel: same with counts ignoring singletons
 df_lowdiv <- read.delim("input_lowdiv_barcharts.nosingleton.Jan3.tsv", stringsAsFactors = T)
@@ -71,6 +74,8 @@ df_lowdiv_tax <- df_lowdiv %>%
   arrange(desc(average_lowdiv)) %>%
   filter(row_number() <=5 | row_number() >= (max(row_number()) - 5)) %>%
   mutate(group=factor(group,ordered=T,levels=rev(unique(group))))
+
+
 # Prepare scale for class
 expanded_purples<-colorRampPalette(brewer.pal(9,"Purples")) # Prep scale
 # all
@@ -88,6 +93,33 @@ gp2$widths<-gp3$widths
 pdf("Supp_mat/figsS9_mid.pdf",width=5,height=7)
 grid.arrange(gp1,gp2,gp3,nrow=3,heights=c(1.25,5,5.5))
 dev.off()
+
+## Statistical test
+df_lowdiv_fortest<-read.delim("all_counts.nosingleton.Jan3.tsv")
+df_lowdiv_fortest <- df_lowdiv_fortest %>%
+  filter(!is.na(n_lowdiv)) %>%
+  filter(sampled=="complete")
+ref <- df_lowdiv_fortest[1,]
+df_result <- data.frame(ref)
+df_result$ztestless <- NA
+df_result$ztestgreat <- NA
+df_result$ztesttwosided <- NA
+for (i in 2:nrow(df_lowdiv_fortest)){
+  print(i)
+  vec <- df_lowdiv_fortest[i,]
+  print(vec)
+  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs), correct = FALSE, alternative="less")
+  vec$ztestless <- test$p.value
+  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs), correct = FALSE, alternative="greater")
+  vec$ztestgreat <- test$p.value
+  test <- prop.test(x = c(ref$n_lowdiv, vec$n_lowdiv), n = c(ref$n_obs, vec$n_obs))
+  vec$ztesttwosided <- test$p.value
+  df_result<-rbind(df_result,vec)
+}
+df_result
+df_result[df_result$ztestgreat>1e-10 & df_result$ztestless>1e-10,]
+
+
 ## Finally, right panel is linking taxa and array types to low diversity spacer sets
 ## Panel C: Boxplot of the frequency of low-diversity sets when at least 1 low-diversity set 
 df_betalowdiv_whole <- read.delim("spacer_sets_frozen.tsv", stringsAsFactors = T)

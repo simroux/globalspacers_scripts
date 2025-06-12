@@ -134,6 +134,32 @@ df_knownhost_f$profile<-factor(df_knownhost_f$profile,ordered=T,levels=c("positi
 ggplot(df_knownhost_f) + geom_bar(aes(x=profile,y=total,fill=match),stat="identity",position="fill",color="black") + xlab("Number of spacer hits for phage-repeat pair") + ylab("Percentage of observation (ignoring unclassified taxa, unless taxonomies\nare already inconsistent for ranks where both are available)") + scale_y_continuous(labels=scales::percent) + coord_flip() + blank_theme + scale_fill_manual(values=c("#feb24c","#31a354")) + theme(legend.position="top")
 ggsave("known_host_panel.pdf",width=5,height=2)
 
+## Confirmation with stat test
+for_test <- df_knownhost_f %>%
+  mutate(total_obs=sum(total)) %>%
+  filter(match=="known_host_genus")
+prop.test(x = c(for_test[for_test$profile=="negative",]$total, for_test[for_test$profile=="unknown",]$total),
+          n = c(for_test[for_test$profile=="negative",]$total_obs, for_test[for_test$profile=="unknown",]$total_obs),
+          correct = FALSE)
+prop.test(x = c(for_test[for_test$profile=="negative",]$total, for_test[for_test$profile=="positive",]$total),
+          n = c(for_test[for_test$profile=="negative",]$total_obs, for_test[for_test$profile=="positive",]$total_obs),
+          correct = FALSE)
+prop.test(x = c(for_test[for_test$profile=="positive",]$total, for_test[for_test$profile=="unknown",]$total),
+          n = c(for_test[for_test$profile=="positive",]$total_obs, for_test[for_test$profile=="unknown",]$total_obs),
+          correct = FALSE)
+
 #### Panel G - Link between mismatch profile and DGR
 ggplot(df_fc_type[df_fc_type$metric=="race" & df_fc_type$category=="dgr" & !is.na(df_fc_type$type),]) + geom_bar(aes(x=value,y=count,fill=type),stat="identity",col="black",position="fill") + blank_theme + coord_flip() + xlab("") + scale_y_continuous(labels=scales::percent) + ylab("Number of observations") + scale_fill_manual(values=color_scale_type) + theme(legend.position="none")
 ggsave("dgr_bars.pdf",width=5,height=1.3)
+
+for_test <- df_fc_type %>%
+  filter(metric=="race" & category=="dgr" & !is.na(type)) %>%
+  mutate(type = case_when(type == "negative" ~ "negative", type == "intermediary" ~ "other", type == "positive" ~ "other")) %>% 
+  group_by(value,type) %>%
+  summarise(obs=sum(count)) %>%
+  mutate(total=sum(obs)) %>%
+  filter(type=="negative")
+  
+prop.test(x = c(for_test[for_test$value=="no",]$obs, for_test[for_test$value=="yes",]$obs),
+          n = c(for_test[for_test$value=="no",]$total, for_test[for_test$value=="yes",]$total),
+          correct = FALSE)

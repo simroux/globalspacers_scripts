@@ -48,3 +48,28 @@ gp4$heights<-gp1$heights
 pdf("Known_hosts_vs_hits.pdf",width=8,height=5)
 grid.arrange(gp1,gp2,gp3,gp4,ncol=2,nrow=2,heights=c(5,3))
 dev.off()
+
+
+## Stats: 10 and more vs less than 10 hits
+for_test <- tmp %>%
+  mutate(n_hits=case_when(n_hits == "1-4" ~ "less_than_10", n_hits == "5-9" ~ "less_than_10", n_hits == "10-49" ~ "more_than_10", n_hits == "50-99" ~ "more_than_10", n_hits == "100-and-more" ~ "more_than_10")) %>%
+  rename(n_obs=total) %>%
+  group_by(n_hits,match) %>%
+  summarise(n_obs=sum(n_obs)) %>%
+  mutate(total=sum(n_obs)) %>%
+  filter(match=="known_host_genus")
+prop.test(x = c(for_test[for_test$n_hits=="less_than_10",]$n_obs, for_test[for_test$n_hits=="more_than_10",]$n_obs),
+          n = c(for_test[for_test$n_hits=="less_than_10",]$total, for_test[for_test$n_hits=="more_than_10",]$total),
+          correct = FALSE)
+
+## Stats: negative vs positive or unknown
+for_test <- tmp2 %>%
+  mutate(profile=case_when(profile == "negative" ~ "negative", profile == "unknown" ~ "other", profile == "positive" ~ "other")) %>%
+  rename(n_obs=total) %>%
+  group_by(profile,match) %>%
+  summarise(n_obs=sum(n_obs)) %>%
+  mutate(total=sum(n_obs)) %>%
+  filter(match=="known_host_genus")
+prop.test(x = c(for_test[for_test$profile=="negative",]$n_obs, for_test[for_test$profile=="other",]$n_obs),
+          n = c(for_test[for_test$profile=="negative",]$total, for_test[for_test$profile=="other",]$total),
+          correct = FALSE)

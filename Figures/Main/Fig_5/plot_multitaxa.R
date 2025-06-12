@@ -102,3 +102,26 @@ gp3$widths<-gp1$widths
 pdf("multitaxa_features.pdf",width=4.5,height=2.8)
 grid.arrange(gp1,gp2,gp3,nrow=3)
 dev.off()
+
+
+## Confirming that the percentage of DGR is higher in categories 2 and 3
+for_test <- df_meta_votu_hq_forplot %>%
+  filter(!is.na(df_meta_votu_hq_forplot$dgr)) %>%
+  group_by(category,dgr) %>%
+  summarise(n_obs=n()) %>%
+  mutate(total=sum(n_obs)) %>%
+  filter(dgr=="yes")
+## one_class_high_other_not_high
+prop.test(x = c(for_test[for_test$category=="one_class_high_other_not_high",]$n_obs, for_test[for_test$category=="single_class",]$n_obs),
+          n = c(for_test[for_test$category=="one_class_high_other_not_high",]$total, for_test[for_test$category=="single_class",]$total),
+          correct = FALSE)
+prop.test(x = c(for_test[for_test$category=="one_class_high_other_not_high",]$n_obs, for_test[for_test$category=="multi_class_with_high_pos",]$n_obs),
+          n = c(for_test[for_test$category=="one_class_high_other_not_high",]$total, for_test[for_test$category=="multi_class_with_high_pos",]$total),
+          correct = FALSE)
+## one_class_highpos_other_class_high
+prop.test(x = c(for_test[for_test$category=="one_class_highpos_other_class_high",]$n_obs, for_test[for_test$category=="single_class",]$n_obs),
+          n = c(for_test[for_test$category=="one_class_highpos_other_class_high",]$total, for_test[for_test$category=="single_class",]$total),
+          correct = FALSE)
+prop.test(x = c(for_test[for_test$category=="one_class_highpos_other_class_high",]$n_obs, for_test[for_test$category=="multi_class_with_high_pos",]$n_obs),
+          n = c(for_test[for_test$category=="one_class_highpos_other_class_high",]$total, for_test[for_test$category=="multi_class_with_high_pos",]$total),
+          correct = FALSE)

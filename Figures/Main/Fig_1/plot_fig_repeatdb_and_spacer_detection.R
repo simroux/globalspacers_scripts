@@ -191,7 +191,7 @@ df_sample_detect <- df_sample_detect %>%
 df_sample_detect$ecosystem_sum <- factor(df_sample_detect$ecosystem_sum,ordered=T,levels=levels_ecosystem)
 ## Calculate the number of CRISPR arrays (i.e. unique repeats) normalized for 1E+09 bp, aggregate by ecosystem, and get the 99% confidence interval
 new.dat<-data.frame(n_base=1E+09) ## This will be the number for which we will predict this (i.e. 1Gb)
-mean_w_err<-data.frame(eco=character(),total_mean=numeric(),total_lower=numeric(),total_upper=numeric(),rsq=numeric(),pval=numeric())
+mean_w_err<-data.frame(eco=character(),total_mean=numeric(),total_lower=numeric(),total_upper=numeric(),rsq=numeric(),pval=numeric(),est=numeric(),stderr=numeric())
 for (eco in levels(df_sample_detect$ecosystem_sum)){
   print(eco)
   test<-df_sample_detect[df_sample_detect$ecosystem_sum==eco,]
@@ -199,9 +199,9 @@ for (eco in levels(df_sample_detect$ecosystem_sum)){
   lm.model<-lm(total_cluster ~ n_base + 0, data=test) ## Linear model, forcing it through zero
   toto <- summary(lm.model)
   titi <- predict(lm.model, newdata=new.dat, interval='confidence',level=0.99) ## This will give us a predicted value for 1E+09 with a confidence interval for this predicted value. We use "confidence" here, i.e. we have the confidence interval of the mean, not for any individual predicted value (see https://rpubs.com/aaronsc32/regression-confidence-prediction-intervals) ## The alternative is "interval='prediction'"
-  mean_w_err<-rbind(mean_w_err,data.frame(eco,titi[1],titi[2],titi[3],toto$r.squared,toto$coefficients[4]))
+  mean_w_err<-rbind(mean_w_err,data.frame(eco,titi[1],titi[2],titi[3],toto$r.squared,toto$coefficients[4],toto$coefficients[1],toto$coefficients[2]))
 }
-colnames(mean_w_err) <- c("eco","mean","lower","upper","rsquared","pvalue")
+colnames(mean_w_err) <- c("eco","mean","lower","upper","rsquared","pvalue","estimate","stderr")
 mean_w_err$eco<-factor(mean_w_err$eco,ordered=T,levels=levels_ecosystem)
 export_tab <- df_sample_detect %>%
   group_by(ecosystem_sum) %>%
@@ -214,3 +214,13 @@ ggplot(mean_w_err,aes(x=eco,y=mean)) + geom_bar(aes(fill=eco),stat="identity",al
 ggsave("Figures/Fig_1_split/Panel_D_ecosystem_perGb.pdf",width=6,height=3)
 
 
+### Calculate Z-scores to compare thermal springs and engineered to all others regression coefficients
+z_scores <- data.frame(eco_1=character(),eco_2=character(),z_stat=numeric(),pvalue=numeric())
+for (i in c(4,7)){
+  for (j in c(1:3,5:6,8:12)){
+    print(paste(i," vs ",j))
+    z_res <- abs(mean_w_err[i,"estimate"]-mean_w_err[j,"estimate"])/sqrt(mean_w_err[i,"stderr"]*mean_w_err[i,"stderr"]+mean_w_err[j,"stderr"]*mean_w_err[j,"stderr"])
+    z_pv <- 1 - cdf(Z, z_res) + cdf(Z, -z_res)
+    z_scores<-rbind(z_scores,data.frame(mean_w_err[i,"eco"],mean_w_err[j,"eco"],z_res,z_pv))
+  }
+}
