@@ -22,4 +22,4 @@ From there, we want to extract the taxonomy and other information about spacers 
 python extract_spacers_from_hits.py --in_file All_spacers_vs_selected_viruses/nr_spacers_hq_vs_selected_uvigs_db_all_hits.tsv --out_file All_spacers_vs_selected_viruses/nr_spacers_hq_vs_selected_uvigs_db_all_hits_spacer_info.tsv -d ../Spacer_database/global_crispr_db.duckdb
 ```
 
-**Note: A more complete examples of how to interact with the spacer database based on hits to a given target is available in the [example notebooks](XX XX TO FILL THE URL XX XX) presented with the SpacerDB release.**
+**Note: A more complete examples of how to interact with the spacer database based on hits to a given target is available in the [example notebooks](https://spacers.jgi.doe.gov/notebooks) presented with the SpacerDB release.**
