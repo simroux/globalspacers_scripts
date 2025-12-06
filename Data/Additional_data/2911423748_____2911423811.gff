@@ -1,0 +1,137 @@
+##gff-version 3
+Ga0477205_64		CDS	1	894	.	-	0	ID=2911426636;Product=transposase;Pfam=
+Ga0477205_64		CDS	1324	1536	.	+	0	ID=2911426637;Product=uncharacterized protein DUF6897;Pfam=
+Ga0477205_64		CDS	1792	2640	.	+	0	ID=2911426638;Product=Mrp family chromosome partitioning ATPase;Pfam=
+Ga0477205_64		CDS	3086	5218	.	+	0	ID=2911426639;Product=phosphoglycerol transferase MdoB-like AlkP superfamily enzyme;Pfam=
+Ga0477205_64		misc_feature	5184	5318	.	-	0	ID=2911426640;Product=TwoAYGGAY RNA;Pfam=
+Ga0477205_64		CDS	5524	5748	.	+	0	ID=2911426641;Product=thiamine monophosphate kinase;Pfam=
+Ga0477205_64		CDS	5989	7353	.	+	0	ID=2911426642;Product=magnesium transporter;Pfam=
+Ga0477205_64		CDS	7503	8462	.	+	0	ID=2911426643;Product=trigger factor;Pfam=
+Ga0477205_64		CDS	8462	9133	.	+	0	ID=2911426644;Product=two-component system, OmpR family, response regulator protein BraR/BceR;Pfam=
+Ga0477205_64		CDS	9140	10288	.	+	0	ID=2911426645;Product=two-component system, OmpR family, sensor histidine kinase BraS/BceS;Pfam=
+Ga0477205_64		CDS	10351	11001	.	+	0	ID=2911426646;Product=DNA-binding GntR family transcriptional regulator;Pfam=
+Ga0477205_64		CDS	11084	11728	.	+	0	ID=2911426647;Product=DNA-binding GntR family transcriptional regulator;Pfam=
+Ga0477205_64		CDS	11909	13174	.	+	0	ID=2911426648;Product=solute carrier family 13 (sodium-dependent dicarboxylate transporter), member 2/3/5;Pfam=
+Ga0477205_64		CDS	13247	14146	.	+	0	ID=2911426649;Product=L(+)-tartrate dehydratase alpha subunit;Pfam=
+Ga0477205_64		CDS	14146	14772	.	+	0	ID=2911426650;Product=L(+)-tartrate dehydratase beta subunit;Pfam=
+Ga0477205_64		CDS	15032	15643	.	+	0	ID=2911426651;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	15908	16555	.	+	0	ID=2911426652;Product=bacitracin transport system ATP-binding protein;Pfam=
+Ga0477205_64		CDS	16450	17847	.	-	0	ID=2911426653;Product=site-specific DNA recombinase;Pfam=
+Ga0477205_64		CDS	17961	18800	.	-	0	ID=2911426654;Product=uncharacterized protein DUF4236;Pfam=
+Ga0477205_64		CDS	19037	19501	.	-	0	ID=2911426655;Product=transcriptional regulator with XRE-family HTH domain;Pfam=
+Ga0477205_64		CDS	19690	19869	.	+	0	ID=2911426656;Product=Rad3-related DNA helicase;Pfam=
+Ga0477205_64		CDS	19884	20021	.	+	0	ID=2911426657;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	20130	21137	.	+	0	ID=2911426658;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	21503	22438	.	+	0	ID=2911426659;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	22429	22728	.	+	0	ID=2911426660;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	22732	23142	.	+	0	ID=2911426661;Product=predicted transcriptional regulator;Pfam=
+Ga0477205_64		CDS	23148	23723	.	+	0	ID=2911426662;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	23720	24106	.	+	0	ID=2911426663;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	24110	24928	.	+	0	ID=2911426664;Product=3'-phosphoadenosine 5'-phosphosulfate sulfotransferase (PAPS reductase)/FAD synthetase;Pfam=
+Ga0477205_64		CDS	24916	25314	.	+	0	ID=2911426665;Product=5-methylcytosine-specific restriction endonuclease McrA;Pfam=
+Ga0477205_64		CDS	25238	25711	.	+	0	ID=2911426666;Product=VRR-NUC domain-containing protein;Pfam=
+Ga0477205_64		CDS	25711	26010	.	+	0	ID=2911426667;Product=ribosomal protein S15P/S13E;Pfam=
+Ga0477205_64		CDS	26007	26258	.	+	0	ID=2911426668;Product=RNA polymerase subunit RPABC4/transcription elongation factor Spt4;Pfam=
+Ga0477205_64		CDS	26242	26802	.	+	0	ID=2911426669;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	26811	27077	.	+	0	ID=2911426670;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	27081	27275	.	+	0	ID=2911426671;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	27256	27435	.	+	0	ID=2911426672;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	27416	27715	.	+	0	ID=2911426673;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	27863	28141	.	+	0	ID=2911426674;Product=hypothetical protein;Pfam=
+Ga0477205_64		tRNA	28145	28217	.	+	0	ID=2911426675;Product=2911426675;Pfam=
+Ga0477205_64		CDS	28268	29029	.	+	0	ID=2911426676;Product=chromosome partitioning protein;Pfam=
+Ga0477205_64		CDS	29060	30475	.	+	0	ID=2911426677;Product=ParB-like chromosome segregation protein Spo0J;Pfam=
+Ga0477205_64		CDS	30478	31452	.	+	0	ID=2911426678;Product=DNA (cytosine-5)-methyltransferase 1;Pfam=
+Ga0477205_64		CDS	31465	31707	.	+	0	ID=2911426679;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	31864	32004	.	+	0	ID=2911426680;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	32048	32530	.	+	0	ID=2911426681;Product=DNA-directed RNA polymerase specialized sigma subunit;Pfam=
+Ga0477205_64		CDS	32727	33536	.	+	0	ID=2911426682;Product=terminase small subunit;Pfam=
+Ga0477205_64		CDS	33658	34149	.	+	0	ID=2911426683;Product=phage terminase Nu1 subunit (DNA packaging protein);Pfam=
+Ga0477205_64		CDS	34130	35965	.	+	0	ID=2911426684;Product=phage terminase large subunit GpA-like protein;Pfam=
+Ga0477205_64		CDS	35966	36202	.	+	0	ID=2911426685;Product=uncharacterized protein DUF6148;Pfam=
+Ga0477205_64		CDS	36348	37904	.	+	0	ID=2911426686;Product=lambda family phage portal protein;Pfam=
+Ga0477205_64		CDS	37867	39054	.	+	0	ID=2911426687;Product=ATP-dependent protease ClpP protease subunit;Pfam=
+Ga0477205_64		CDS	39068	39403	.	+	0	ID=2911426688;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	39420	40475	.	+	0	ID=2911426689;Product=major capsid protein E;Pfam=
+Ga0477205_64		CDS	40475	40819	.	+	0	ID=2911426690;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	40816	41376	.	+	0	ID=2911426691;Product=minor tail protein Z (GPZ);Pfam=
+Ga0477205_64		CDS	41382	41879	.	+	0	ID=2911426692;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	41896	42282	.	+	0	ID=2911426693;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	42286	43716	.	+	0	ID=2911426694;Product=Bacteriophage tail sheath protein;Pfam=
+Ga0477205_64		CDS	43734	44252	.	+	0	ID=2911426695;Product=Bacteriophage tail tube protein;Pfam=
+Ga0477205_64		CDS	44326	44745	.	+	0	ID=2911426696;Product=tail assembly chaperone E/41/14-like protein;Pfam=
+Ga0477205_64		CDS	44936	48580	.	+	0	ID=2911426697;Product=TP901 family phage tail tape measure protein;Pfam=
+Ga0477205_64		CDS	48573	48788	.	+	0	ID=2911426698;Product=phage tail protein X;Pfam=
+Ga0477205_64		CDS	48790	50088	.	+	0	ID=2911426699;Product=Bacteriophage probable baseplate hub protein;Pfam=
+Ga0477205_64		CDS	50089	50439	.	+	0	ID=2911426700;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	50443	50844	.	+	0	ID=2911426701;Product=phage protein U;Pfam=
+Ga0477205_64		CDS	50851	51180	.	+	0	ID=2911426702;Product=Bacteriophage baseplate protein W;Pfam=
+Ga0477205_64		CDS	51173	52315	.	+	0	ID=2911426703;Product=phage-related baseplate assembly protein;Pfam=
+Ga0477205_64		CDS	52308	53309	.	+	0	ID=2911426704;Product=phage tail P2-like protein;Pfam=
+Ga0477205_64		CDS	53325	53636	.	+	0	ID=2911426705;Product=flavin-binding protein dodecin;Pfam=
+Ga0477205_64		CDS	53640	54134	.	+	0	ID=2911426706;Product=Flp pilus assembly protein TadG;Pfam=
+Ga0477205_64		CDS	54134	54313	.	+	0	ID=2911426707;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	54303	54656	.	+	0	ID=2911426708;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	54663	55715	.	+	0	ID=2911426709;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	55798	56244	.	+	0	ID=2911426710;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	56686	57903	.	+	0	ID=2911426711;Product=RNA-directed DNA polymerase;Pfam=
+Ga0477205_64		CDS	57881	58336	.	+	0	ID=2911426712;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	58359	58742	.	+	0	ID=2911426713;Product=formate hydrogenlyase subunit 3/multisubunit Na+/H+ antiporter MnhD subunit;Pfam=
+Ga0477205_64		CDS	58762	60186	.	+	0	ID=2911426714;Product=LysM repeat protein;Pfam=
+Ga0477205_64		CDS	60205	60771	.	+	0	ID=2911426715;Product=uncharacterized protein YnzC (UPF0291/DUF896 family);Pfam=
+Ga0477205_64		CDS	60880	61113	.	-	0	ID=2911426716;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	61120	61464	.	-	0	ID=2911426717;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	61512	61808	.	-	0	ID=2911426718;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	61983	62225	.	+	0	ID=2911426719;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	62210	62395	.	+	0	ID=2911426720;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	62385	62660	.	+	0	ID=2911426721;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	62925	63218	.	+	0	ID=2911426722;Product=cell division protein YceG involved in septum cleavage;Pfam=
+Ga0477205_64		CDS	63269	63451	.	+	0	ID=2911426723;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	63631	63801	.	+	0	ID=2911426724;Product=ABC-type lipoprotein export system ATPase subunit;Pfam=
+Ga0477205_64		CDS	63794	65833	.	+	0	ID=2911426725;Product=bacitracin transport system permease protein;Pfam=
+Ga0477205_64		CDS	65915	67168	.	+	0	ID=2911426726;Product=alanyl-tRNA synthetase;Pfam=
+Ga0477205_64		CDS	67273	68613	.	-	0	ID=2911426727;Product=butyryl-CoA:acetate CoA-transferase;Pfam=
+Ga0477205_64		CDS	68918	70225	.	+	0	ID=2911426728;Product=23S rRNA (cytosine1962-C5)-methyltransferase;Pfam=
+Ga0477205_64		CDS	70841	71029	.	+	0	ID=2911426729;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	71013	71138	.	+	0	ID=2911426730;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	71159	71467	.	+	0	ID=2911426731;Product=nitrate reductase NapE component;Pfam=
+Ga0477205_64		CDS	71846	72337	.	+	0	ID=2911426732;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	72547	72918	.	+	0	ID=2911426733;Product=nitroreductase;Pfam=
+Ga0477205_64		CDS	73444	74262	.	+	0	ID=2911426734;Product=predicted ATPase;Pfam=
+Ga0477205_64		CDS	74301	74801	.	+	0	ID=2911426735;Product=flavodoxin I;Pfam=
+Ga0477205_64		CDS	74817	75974	.	+	0	ID=2911426736;Product=alcohol dehydrogenase YqhD (iron-dependent ADH family);Pfam=
+Ga0477205_64		CDS	76267	77421	.	-	0	ID=2911426737;Product=serine/threonine protein kinase;Pfam=
+Ga0477205_64		CDS	77499	77960	.	+	0	ID=2911426738;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	78055	78981	.	+	0	ID=2911426739;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	79061	79417	.	+	0	ID=2911426740;Product=uncharacterized membrane protein;Pfam=
+Ga0477205_64		CDS	79646	80200	.	+	0	ID=2911426741;Product=RNA polymerase sigma factor (sigma-70 family);Pfam=
+Ga0477205_64		CDS	80197	82110	.	+	0	ID=2911426742;Product=inhibitor of cysteine peptidase;Pfam=
+Ga0477205_64		CDS	82294	83226	.	+	0	ID=2911426743;Product=drug/metabolite transporter (DMT)-like permease;Pfam=
+Ga0477205_64		CDS	83316	84419	.	+	0	ID=2911426744;Product=serine-type D-Ala-D-Ala carboxypeptidase (penicillin-binding protein 5/6);Pfam=
+Ga0477205_64		CDS	84450	85697	.	+	0	ID=2911426745;Product=23S rRNA (uracil1939-C5)-methyltransferase;Pfam=
+Ga0477205_64		CDS	85800	86294	.	+	0	ID=2911426746;Product=8-oxo-dGTP diphosphatase;Pfam=
+Ga0477205_64		CDS	86347	87300	.	+	0	ID=2911426747;Product=type III secretion system (T3SS) SseB-like protein;Pfam=
+Ga0477205_64		CDS	87340	87930	.	+	0	ID=2911426748;Product=uncharacterized membrane protein HdeD (DUF308 family);Pfam=
+Ga0477205_64		CDS	87962	88183	.	+	0	ID=2911426749;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	88183	88752	.	+	0	ID=2911426750;Product=probable dihydroxyacetone kinase regulator;Pfam=
+Ga0477205_64		CDS	89009	91093	.	+	0	ID=2911426751;Product=uncharacterized protein;Pfam=
+Ga0477205_64		CDS	91187	93721	.	+	0	ID=2911426752;Product=putative membrane protein;Pfam=
+Ga0477205_64		CDS	93760	94341	.	+	0	ID=2911426753;Product=manganese efflux pump family protein;Pfam=
+Ga0477205_64		CDS	94478	95599	.	+	0	ID=2911426754;Product=CAAX protease family protein;Pfam=
+Ga0477205_64		CDS	95665	97521	.	+	0	ID=2911426755;Product=radical SAM superfamily enzyme YgiQ (UPF0313 family);Pfam=
+Ga0477205_64		CDS	97534	98304	.	+	0	ID=2911426756;Product=DNA polymerase III subunit epsilon;Pfam=
+Ga0477205_64		CDS	98436	98681	.	-	0	ID=2911426757;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	98747	98851	.	+	0	ID=2911426758;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	98956	100596	.	+	0	ID=2911426759;Product=vancomycin resistance protein YoaR;Pfam=
+Ga0477205_64		CDS	100695	101696	.	+	0	ID=2911426760;Product=hydrogenase expression/formation protein HypE;Pfam=
+Ga0477205_64		CDS	101724	102206	.	+	0	ID=2911426761;Product=DNA-binding Lrp family transcriptional regulator;Pfam=
+Ga0477205_64		CDS	102206	103384	.	+	0	ID=2911426762;Product=aminotransferase;Pfam=
+Ga0477205_64		CDS	103406	103909	.	+	0	ID=2911426763;Product=tRNA (cytidine/uridine-2'-O-)-methyltransferase;Pfam=
+Ga0477205_64		CDS	103999	104856	.	+	0	ID=2911426764;Product=energy-coupling factor transport system ATP-binding protein;Pfam=
+Ga0477205_64		CDS	104869	105714	.	+	0	ID=2911426765;Product=energy-coupling factor transport system ATP-binding protein;Pfam=
+Ga0477205_64		CDS	105764	106597	.	+	0	ID=2911426766;Product=energy-coupling factor transport system permease protein;Pfam=
+Ga0477205_64		CDS	106633	107367	.	+	0	ID=2911426767;Product=tRNA pseudouridine38-40 synthase;Pfam=
+Ga0477205_64		CDS	107495	108730	.	+	0	ID=2911426768;Product=hypothetical protein;Pfam=
+Ga0477205_64		CDS	108824	110398	.	+	0	ID=2911426769;Product=alginate O-acetyltransferase complex protein AlgI;Pfam=
+Ga0477205_64		CDS	110716	111144	.	+	0	ID=2911426770;Product=large subunit ribosomal protein L13;Pfam=
+Ga0477205_64		CDS	111161	111553	.	+	0	ID=2911426771;Product=small subunit ribosomal protein S9;Pfam=

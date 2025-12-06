@@ -90,14 +90,22 @@ ggplot(df_stats) + geom_bar(aes(x=category,y=count,fill=hit),stat="identity",col
 dev.off()
 
 ## Panel B - PAM // Summary_PAM_detection_by_type.tsv
-df_pam_type <- read.delim("Summary_PAM_detection_by_type.tsv",stringsAsFactors = T)
-summary(df_pam_type)
-tmp <- df_pam_type %>%
-  group_by(Lvl_1_type,Expected) %>%
-  summarise(total=sum(Count)) %>%
-  mutate(Lvl_1_type=factor(Lvl_1_type,ordered=T,levels=levels_type))
 
-ggplot(tmp) + geom_bar(aes(x=Lvl_1_type,y=total,fill=Lvl_1_type,alpha=Expected),col="black",stat="identity",position="fill") + scale_x_discrete(drop=F) + scale_y_continuous(labels=scales::percent, expand=c(0.01,0.01)) + xlab("CRISPR array (predicted) type") + ylab("Percentage of arrays") + coord_flip() + scale_fill_manual(values=scale_type) + scale_alpha_manual(values=c(0,0.3,1)) + blank_theme + theme(legend.position="bottom")
+df_pam_type_raw <- read.delim("../../../Analyses/Target_IMGVR_IMGPR/PAM_detection/Stat_motif_detection.tsv",sep=""),stringsAsFactors = T)
+df_pam_type <- df_pam_type_raw %>%
+  filter(type != "Unknown") %>% 
+  mutate(known=expected+other_known) %>%
+  separate_wider_delim(type, "-", names = c("type_simple"), too_many = "drop", cols_remove=FALSE) 
+## Simplify the CRISPR type
+df_pam_type$type_simple <- factor(df_pam_type$type_simple,ordered=T,levels=c("VI","V","IV","III","II","I"))
+df_pam_type <- df_pam_type %>%
+  group_by(type_simple) %>%
+  summarise(no_conserved_pos=sum(no_conserved_pos),known_motif=sum(known),potential_new=sum(potential_new)) %>%
+  pivot_longer(!type_simple)
+## Order values
+df_pam_type$name <- factor(df_pam_type$name,ordered=T,levels=rev(c("known_motif","potential_new","no_conserved_pos")))
+
+ggplot(df_pam_type) + geom_bar(aes(x=type_simple,y=value,fill=type_simple,alpha=name),col="black",stat="identity",position="fill") + scale_x_discrete(drop=F) + scale_y_continuous(labels=scales::percent, expand=c(0.01,0.01)) + xlab("CRISPR array (predicted) type") + ylab("Percentage of arrays") + coord_flip() + scale_fill_manual(values=scale_type) + scale_alpha_manual(values=c(0,0.3,1)) + blank_theme + theme(legend.position="bottom")
 ggsave("Panel_B_PAM.pdf",width=3,height=4)
 
 # Overall stats

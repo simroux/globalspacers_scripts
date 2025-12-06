@@ -9,9 +9,6 @@ import kcounter
 
 def main():
 	parser = argparse.ArgumentParser()
-	# parser.add_argument("-d", "--repeat_db_dir", dest='db_dir', required=True, default='none', help="path to the repeat database folder")
-	# parser.add_argument("-w", "--wdir", dest='wdir', required=True, default='none', help="output directory (will be created if it does not exist)")
-	# parser.add_argument("-t", "--n_threads", dest='n_threads', required=False, default=2, help="number of threads to use (default 2)")
 	args = vars(parser.parse_args())
 	set_default(args)
 	# 
@@ -35,7 +32,7 @@ def main():
 	df_info = pd.read_csv(args["ref_file"],sep="\t")
 	print(f"{df_info}")
 	df_info = df_info.merge(df_complex, left_on="Cluster", right_on="Repeat", how="left")
-	df_info.to_csv("Array_info_with_complexity.tsv",index=False, sep='\t', na_rep='NA')
+	df_info.to_csv(args["summary_file"],index=False, sep='\t', na_rep='NA')
 
 	
 
@@ -78,10 +75,11 @@ def test_kmer(seq,out):
 
 
 def set_default(args):
-	args["input_repeats"] = "/clusterfs/jgi/groups/science/metagen/virus/database/spacerextractor_db/Db_SE_GTDBr214_GB_IMG/Repeats.fna"
-	args["ref_file"] = "/clusterfs/jgi/groups/science/metagen/virus/database/spacerextractor_db/Db_SE_GTDBr214_GB_IMG/Arrays_info.tsv"
+	args["input_repeats"] = "Repeats.fna"
+	args["ref_file"] = "all_repeats_clstr.tab"
 	args["out_file"] = "Repeats_complexity.tsv"
 	args["out_file_detail"] = "Repeats_kmer_complexity_detailed.tsv"
+	args["summary_file"] = "Array_info_with_complexity.tsv"
 
 
 if __name__ == "__main__":

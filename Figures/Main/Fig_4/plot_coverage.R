@@ -14,152 +14,79 @@ summary(df_n_hit)
 ggplot(df_n_hit) + geom_bar(aes(x=n_spacers,y=n_obs,fill=n_spacers),stat="identity",col="black") + blank_theme + scale_y_continuous(labels=scales::comma,expand=expansion(mult=0.01)) + scale_fill_manual(values=c(rep("gray",9),rep("#de2d26",10))) + theme(legend.position="none") + ylab("number of observations") + xlab("number of spacers connecting array to virus")
 ggsave("panel_A_spacernumber.pdf",width=4,height=1.5)
 
-
-## Panel B: overall coverage vs per-sample coverage for viruses targeted on at least 10% of their length or 1kb
-library(ggrastr)
-library(grid)
-df_hit_samples <- read.delim("spacer_hit_distribution.tsv",stringsAsFactors = T)
-## Make categories - in the end we won't use high / very-high, but we will color based on whether the max sample represents more or less of 20% of the total coverage
-df_hit_samples$category <- case_when( (df_hit_samples$local_cover/df_hit_samples$global_cover) >= 0.2 ~ "local", (df_hit_samples$local_cover/df_hit_samples$global_cover) < 0.2 ~ "global_only")
-df_hit_samples$category <- factor(df_hit_samples$category)
-summary(df_hit_samples)
-p2 <- ggplot(df_hit_samples) + geom_histogram(aes(x=global_cover,fill=category),col="black",breaks=seq(0,100,2)) + xlim(-0.05,100) + scale_y_continuous(labels=scales::comma) + xlab("") + ylab("Number of observations") + blank_theme + scale_fill_manual(values=c("#66c2a5","#fc8d62")) + theme(legend.position="none")
-p3 <- ggplot(df_hit_samples) + geom_histogram(aes(x=local_cover/global_cover,fill=category),col="black",breaks=seq(0,1,0.02)) + scale_y_continuous(labels=scales::comma) + xlab("") + ylab("Number of observations") + blank_theme + coord_flip(xlim=c(0,1))+ scale_fill_manual(values=c("#66c2a5","#fc8d62"))+ theme(legend.position="none")
-p1 <- ggplot(df_hit_samples) + rasterise(geom_point(aes(x=global_cover,y=local_cover/global_cover,col=category),alpha=0.1),dpi=600) + scale_y_continuous(labels=scales::percent,lim=c(0,1)) + scale_color_manual(values=c("#66c2a5","#fc8d62")) + blank_theme + theme(panel.grid.major=element_line(colour="lightgrey",linewidth=0.3)) + xlim(0,100) + xlab("virus coverage by spacers (%) across all samples") + ylab("maximum virus coverage in individual sample, relative to total coverage across samples (x-axis)") + theme(legend.position="none")
-gp1 <- ggplot_gtable(ggplot_build(p1))
-gp2 <- ggplot_gtable(ggplot_build(p2))
-gp3 <- ggplot_gtable(ggplot_build(p3))
-gp2$widths<-gp1$widths
-gp3$heights<-gp1$heights
-blank <- grid.rect(gp=gpar(col="white"))
-pdf("panel_B_coverage_by_sample.pdf",width=5,height=5)
-grid.arrange(gp2,blank,gp1,gp3,nrow=2,ncol=2,widths=c(4,1),heights=c(1,4))
-dev.off()
-
-## Some numbers for papers:
-# % of global only vs local
-df_hit_samples %>%
-  group_by(category) %>%
-  summarise(count=n()) %>%
-  mutate(pcent=count/sum(count)*100)
-# Number of high targeting
-nrow(df_hit_samples)
-
-## Panels C and D - mismatch profiles
-df_profiles<-read.delim("../../../Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/Virus_to_repeat_hits_profile-medium_only_with_cc_with_virusinfo.tsv",stringsAsFactors = T)
-df_profiles$bins <- cut(df_profiles$cc,breaks = seq(-1.025,1.025,0.05))
-df_profiles$type <- factor(df_profiles$type,ordered=T,levels=c("medium","high"))
-colourCount <- length(unique(df_profiles$bins))
-summary(df_profiles)
-
-## Get numbers for paper
-# Overall proportion
-df_profiles %>%
-  group_by(category) %>%
-  summarise(total=n()) %>%
-  mutate(pcent=total/sum(total)*100)
-# Proportion by type
-df_profiles %>%
-  group_by(type,category) %>%
-  summarise(total=n()) %>%
-  mutate(pcent=total/sum(total)*100)
-## First part of figure - the x-y plot to illustrate how the correlation looks
-df_profiles_sampled <- df_profiles %>% 
-  sample_n(100) %>%
-  pivot_longer(cols=n_hit_0:n_hit_3, names_to="n_mismatch", values_to="number") %>%
-  unite(code,c("uvig","array")) %>%
-  select(c("code","cc","type","number","n_mismatch")) %>%
-  group_by(code) %>%
-  mutate(z_score = (number-mean(number))/sd(number)) %>%
-  ungroup()
-
-p1<-ggplot(df_profiles_sampled) + geom_line(aes(x=n_mismatch,y=z_score,group=code,col=cc),alpha=0.5) + geom_point(aes(x=n_mismatch,y=z_score,group=code,col=cc),alpha=0.5,size=2) + scale_y_continuous(labels=scales::comma,expand=expansion(mult=0.02)) + ylab("Normalized number of spacers (Z-score transform)") + scale_colour_distiller(palette="RdGy",direction=-1,name="Correlation coefficient",lim=c(-1,1)) + xlab("Number of mismatches between spacer and virus") + scale_x_discrete(labels=c("0","1","2","3"),expand=expansion(add=0.1)) + blank_theme + theme(legend.position="bottom")
-## next is the overall distribution across all combinations included here
-## Note: we use brewer.pal(7) because the help from scale_colour_distiller says " smoothly interpolating 7 colours from any palette" and we try to keep the same scale
-p2<-ggplot(df_profiles) + geom_histogram(aes(x=cc,fill=bins),binwidth = 0.05,col="black",alpha=0.8) + scale_fill_manual(values=colorRampPalette(rev(brewer.pal(7, "RdGy")))(colourCount)) + blank_theme  + theme(legend.position="null") + xlab("Correlation coefficient") + ylab("Number of virus-array pairs (≥ 10 spacer hits) XX AND AT LEAST ONE HIGH TARGETING FOR THE VIRUS") + scale_x_continuous(expand = expansion(add=0.03)) + scale_y_continuous(labels=scales::comma,expand=expansion(mult=0.01)) + geom_vline(xintercept=-0.7,linetype="dashed")  + geom_vline(xintercept=0.7,linetype="dashed")
-p3 <- ggplot(df_profiles[df_profiles$type=="medium",]) + geom_histogram(aes(x=cc,fill=bins),binwidth = 0.05,col="black",alpha=0.8) + scale_fill_manual(values=colorRampPalette(rev(brewer.pal(7, "RdGy")))(colourCount)) + blank_theme  + theme(legend.position="null") + xlab("Correlation coefficient") + ylab("Number of virus-array pairs (≥ 10 spacer hits) XX AND AT LEAST ONE HIGH TARGETING FOR THE VIRUS") + scale_x_continuous(expand = expansion(add=0.03)) + scale_y_continuous(labels=scales::comma,expand=expansion(mult=0.01)) + geom_vline(xintercept=-0.7,linetype="dashed")  + geom_vline(xintercept=0.7,linetype="dashed") 
-p4 <- ggplot(df_profiles[df_profiles$type=="high",]) + geom_histogram(aes(x=cc,fill=bins),binwidth = 0.05,col="black",alpha=0.8) + scale_fill_manual(values=colorRampPalette(rev(brewer.pal(7, "RdGy")))(colourCount)) + blank_theme  + theme(legend.position="null") + xlab("Correlation coefficient") + ylab("Number of virus-array pairs (≥ 10 spacer hits) XX AND AT LEAST ONE HIGH TARGETING FOR THE VIRUS") + scale_x_continuous(expand = expansion(add=0.03)) + scale_y_continuous(labels=scales::comma,expand=expansion(mult=0.01)) + geom_vline(xintercept=-0.7,linetype="dashed")  + geom_vline(xintercept=0.7,linetype="dashed") 
-## Finally, add the plasmid for comparison
-df_profiles_plasmid<-read.delim("../../../Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/Plasmid_to_repeat_hits_profile-medium_with_cc.tsv",stringsAsFactors = T)
-### Distribution of correlation coefficient
-df_profiles_plasmid$bins <- cut(df_profiles_plasmid$cc,breaks = seq(-1.025,1.025,0.05))
-colourCountp <- length(unique(df_profiles_plasmid$bins))
-p5<-ggplot(df_profiles_plasmid) + geom_histogram(aes(x=cc,fill=bins),binwidth = 0.05,col="black",alpha=0.8) + scale_fill_manual(values=colorRampPalette(rev(brewer.pal(7, "RdGy")))(colourCountp)) + blank_theme  + theme(legend.position="null") + xlab("Correlation coefficient") + ylab("Number of virus-array pairs (≥ 10 spacer hits)") + scale_x_continuous(expand = expansion(add=0.03)) + scale_y_continuous(expand=expansion(mult=0.01),labels=scales::comma) + geom_vline(xintercept=-0.7,linetype="dashed")  + geom_vline(xintercept=0.7,linetype="dashed")
-## Get numbers for paper
-# Overall proportion
-df_profiles_plasmid %>%
-  group_by(category) %>%
-  summarise(total=n()) %>%
-  mutate(pcent=total/sum(total)*100)
-
-
-gp1 <- ggplot_gtable(ggplot_build(p1))
-gp2 <- ggplot_gtable(ggplot_build(p2))
-gp3 <- ggplot_gtable(ggplot_build(p3))
-gp4 <- ggplot_gtable(ggplot_build(p4))
-gp5 <- ggplot_gtable(ggplot_build(p5))
-gp2$widths<-gp1$widths
-gp3$widths<-gp1$widths
-gp4$widths<-gp1$widths
-gp5$widths<-gp1$widths
-pdf("panels_hits_vs_mismatches.pdf",width=3,height=6)
-grid.arrange(gp1,gp2,gp3,gp4,gp5,nrow=5,heights=c(3,1,1,1,1))
-dev.off()
-
-
-### Panel E: get distribution of targeting level and type
-df_fc_type <- read.delim("Final_counts_for_type_vs_level-and-dgr.tsv",stringsAsFactors = T)
-df_fc_type$type<-factor(df_fc_type$type,ordered=T,levels=rev(c("low","medium","high","negative","intermediary","positive")))
-color_scale_type <- c("low"="#ffffd9","medium"="#7fcdbb","high"="#225ea8","negative"="#515151","positive"="#d45c48","intermediary"="white")
-p1 <- ggplot(df_fc_type[df_fc_type$metric=="type" & df_fc_type$category=="all",]) + geom_bar(aes(x=value,y=count,fill=type),stat="identity",col="black",position="fill") + blank_theme + coord_flip() + xlab("") + scale_y_continuous(labels=scales::percent) + ylab("Number of observations") + scale_fill_manual(values=color_scale_type)
-p2 <- ggplot(df_fc_type[df_fc_type$metric=="race" & df_fc_type$category=="all" & !is.na(df_fc_type$type),]) + geom_bar(aes(x=value,y=count,fill=type),stat="identity",col="black",position="fill") + blank_theme + coord_flip() + xlab("") + scale_y_continuous(labels=scales::percent) + ylab("Number of observations") + scale_fill_manual(values=color_scale_type)
-gp1 <- ggplot_gtable(ggplot_build(p1))
-gp2 <- ggplot_gtable(ggplot_build(p2))
-gp2$widths<-gp1$widths
-pdf("panel_level_and_type.pdf",width=5,height=1.5)
-grid.arrange(gp1,gp2)
-dev.off()
-
-### Panel F - Prediction of targeting type
+## Panel B: Distribution of consistent/inconsistent for viruses with known hosts based on number of spacer hits
 df_knownhost<-read.delim("Summary_known_host_vs_hits.tsv",stringsAsFactors = T)
 df_knownhost$n_hits<-factor(df_knownhost$n_hits,ordered=T,levels=unique(df_knownhost$n_hits))
-df_knownhost$profile<-factor(df_knownhost$profile,ordered=T,levels=c("negative","unknown","positive"))
 df_knownhost$match<-factor(df_knownhost$match,ordered=T,levels=c("other_taxon","unclassified_genus_but_consistent_taxonomy","known_host_genus"))
-df_knownhost_f <- df_knownhost %>%
-  filter(n_hits!="1-4" & n_hits!="5-9") %>%
-  filter(match!="unclassified_genus_but_consistent_taxonomy") %>%
-  group_by(profile,match) %>%
+summary(df_knownhost)
+tmp <- df_knownhost %>%
+  group_by(n_hits,match) %>%
   summarise(total=sum(counts))
-df_knownhost_f$profile<-factor(df_knownhost_f$profile,ordered=T,levels=c("positive","unknown","negative"))
-ggplot(df_knownhost_f) + geom_bar(aes(x=profile,y=total,fill=match),stat="identity",position="fill",color="black") + xlab("Number of spacer hits for phage-repeat pair") + ylab("Percentage of observation (ignoring unclassified taxa, unless taxonomies\nare already inconsistent for ranks where both are available)") + scale_y_continuous(labels=scales::percent) + coord_flip() + blank_theme + scale_fill_manual(values=c("#feb24c","#31a354")) + theme(legend.position="top")
-ggsave("known_host_panel.pdf",width=5,height=2)
+ggplot(tmp[tmp$match!="unclassified_genus_but_consistent_taxonomy",]) + geom_bar(aes(x=n_hits,y=total,fill=match),stat="identity",position="fill",color="black") + xlab("Number of spacer hits for phage-repeat pair") + ylab("Percentage of observation (ignoring unclassified taxa, unless taxonomies\nare already inconsistent for ranks where both are available)") + scale_y_continuous(labels=scales::percent) + coord_flip() + blank_theme + scale_fill_manual(values=c("#feb24c","#31a354")) + theme(legend.position="top")
+ggsave("panel_B_known_hosts.pdf",width=4,height=2)
+# Get numbers for paper
+tmp %>%
+  filter(match!="unclassified_genus_but_consistent_taxonomy") %>%
+  group_by(n_hits, match) %>%
+  summarise(total=sum(total)) %>%
+  mutate(pcent=total/sum(total)*100)
 
-## Confirmation with stat test
-for_test <- df_knownhost_f %>%
-  mutate(total_obs=sum(total)) %>%
-  filter(match=="known_host_genus")
-prop.test(x = c(for_test[for_test$profile=="negative",]$total, for_test[for_test$profile=="unknown",]$total),
-          n = c(for_test[for_test$profile=="negative",]$total_obs, for_test[for_test$profile=="unknown",]$total_obs),
-          correct = FALSE)
-prop.test(x = c(for_test[for_test$profile=="negative",]$total, for_test[for_test$profile=="positive",]$total),
-          n = c(for_test[for_test$profile=="negative",]$total_obs, for_test[for_test$profile=="positive",]$total_obs),
-          correct = FALSE)
-prop.test(x = c(for_test[for_test$profile=="positive",]$total, for_test[for_test$profile=="unknown",]$total),
-          n = c(for_test[for_test$profile=="positive",]$total_obs, for_test[for_test$profile=="unknown",]$total_obs),
-          correct = FALSE)
 
-#### Panel G - Link between mismatch profile and DGR
-ggplot(df_fc_type[df_fc_type$metric=="race" & df_fc_type$category=="dgr" & !is.na(df_fc_type$type),]) + geom_bar(aes(x=value,y=count,fill=type),stat="identity",col="black",position="fill") + blank_theme + coord_flip() + xlab("") + scale_y_continuous(labels=scales::percent) + ylab("Number of observations") + scale_fill_manual(values=color_scale_type) + theme(legend.position="none")
-ggsave("dgr_bars.pdf",width=5,height=1.3)
+## Panel C: Frequency of DGR across inconsistent virus-repeat pairs
+df_known_raw <- read.delim("../../../Analyses/Target_IMGVR_IMGPR/Known_hosts/Consistency_known_host_with_hits.tsv",stringsAsFactors = T)
+summary(df_known_raw)
+length(levels(df_known_raw$uvig))
+tmp <- df_known_raw %>%
+  filter(n_hits>=10) %>%
+  filter(quality=="Reference" | quality=="High-quality")
+ggplot(tmp[tmp$result=="inconsistent",]) + geom_bar(aes(x=result,fill=dgr),position="fill",col="black") + scale_y_continuous(labels=scales::percent) + coord_flip() + scale_fill_manual(values=c("#515151","#d45c48")) + theme(legend.position="bottom") + blank_theme
+ggsave("panel_C_dgr.pdf",width=4,height=0.82)
+## For counts
+tmp %>%
+  group_by(result,dgr) %>%
+  summarise(total=n()) %>%
+  mutate(pcent=total/sum(total)*100)
+## 57.6% DGR in the inconsistent category
+tmp %>%
+  group_by(dgr) %>%
+  summarise(total=n()) %>%
+  mutate(pcent=total/sum(total)*100)
+## 16.8% DGR overall
 
-for_test <- df_fc_type %>%
-  filter(metric=="race" & category=="dgr" & !is.na(type)) %>%
-  mutate(type = case_when(type == "negative" ~ "negative", type == "intermediary" ~ "other", type == "positive" ~ "other")) %>% 
-  group_by(value,type) %>%
-  summarise(obs=sum(count)) %>%
-  mutate(total=sum(obs)) %>%
-  filter(type=="negative")
-  
-prop.test(x = c(for_test[for_test$value=="no",]$obs, for_test[for_test$value=="yes",]$obs),
-          n = c(for_test[for_test$value=="no",]$total, for_test[for_test$value=="yes",]$total),
-          correct = FALSE)
+## Panel D: Distribution of near-exact vs distant matches
+theme_d<-theme_classic() + theme(text=element_text(color="black",size=8,family="Source Sans 3"),axis.ticks=element_line(color="black"),axis.text=element_text(color="black",size=8,family="Source Sans 3"))
+df_profile_all <- read.delim("../../../Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/Virus_to_repeat_hits_profile-medium_only_with_cat_with_virusinfo.tsv",stringsAsFactors = T)
+df_profile_all$category<-factor(df_profile_all$category,ordered=T,levels=c("mostly_inexact","mixed","mostly_exact"))
+scale_category<-c("mostly_inexact"="#f1a340","mixed"="#f7f7f7","mostly_exact"="#998ec3")
+tmp_best <- df_profile_all %>%
+  arrange(desc(total)) %>%
+  group_by(uvig) %>%
+  summarise(category=first(category),dgr=first(dgr),known_host=first(known_host),ratio=first(ratio))
+p1<-ggplot(tmp_best) + geom_histogram(aes(x=ratio,fill=category),binwidth=0.025,center=0.0125,col="black") + scale_fill_manual(values=scale_category) + theme_d + theme(legend.position="top") + ylab("number of observations")
+p2<-ggplot(df_profile_all[!is.na(df_profile_all$known_host) & (df_profile_all$known_host=="consistent" | df_profile_all$known_host=="inconsistent"),]) + geom_histogram(aes(x=ratio,fill=category),binwidth=0.025,center=0.0125,col="black") + facet_grid(rows=vars(known_host), scales="free_y") + scale_fill_manual(values=scale_category) + theme_d + theme(legend.position="bottom") + ylab("number of observations")
+gp1 <- ggplot_gtable(ggplot_build(p1))
+gp2 <- ggplot_gtable(ggplot_build(p2))
+gp1$widths<-gp2$widths
+gp1$heights<-gp2$heights
+pdf("panel_D_distribution.pdf",width=6,height=4)
+grid.arrange(gp1,gp2,nrow=2,ncol=1)
+dev.off()
+
+## Panel E: how many distinct repeats with 10 spacer hits or more, and category distribution, for DGR+ vs DGR-
+# first, the number of repeats
+tmp1<-df_profile_all %>%
+  group_by(dgr,uvig) %>%
+  summarise(n_repeat=n()) 
+p1<-ggplot(tmp1) + geom_boxplot(aes(x=dgr,y=n_repeat,fill=dgr),outliers=F) + ylab("Number of distinct repeats") + xlab("dgr")  + coord_flip() + scale_fill_manual(values=c("#515151","#d45c48")) + blank_theme + theme(panel.grid.major=element_line(colour="lightgrey",linewidth=0.3), legend.position="bottom")
+# Compare median
+tmp1 %>%
+  group_by(dgr) %>%
+  summarise(med_n=median(n_repeat))
+# second, the category of these hits
+p2 <- ggplot(df_profile_all) + geom_bar(aes(x=dgr,fill=forcats::fct_rev(category)),position="fill",col="black",width=0.7) + scale_fill_manual(values=scale_category)+ blank_theme + theme(panel.grid.major=element_line(colour="lightgrey",linewidth=0.3), legend.position="bottom") + ylab("percentage of virus-repeat pairs") + scale_y_continuous(labels=scales::percent) + coord_flip()
+gp1 <- ggplot_gtable(ggplot_build(p1))
+gp2 <- ggplot_gtable(ggplot_build(p2))
+gp1$heights<-gp2$heights
+pdf("panel_E_DGR.pdf",width=5,height=1.8)
+grid.arrange(gp1,gp2,ncol=2,widths=c(1.5,2))
+dev.off()

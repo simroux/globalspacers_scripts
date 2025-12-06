@@ -16,7 +16,7 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	die "\n";
 }
 
-my $info_file="../../../Data/Spacer_db/IMGVR_sequence_information_Aug26.tsv";
+my $info_file="../../../Data/Spacer_db/IMGVR_sequence_information_Oct17.tsv";
 
 my $cl_to_array="All_spacers_vr_hq.tsv";
 my $hit_file="All_hits_vr_hq.tsv";

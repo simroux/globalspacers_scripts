@@ -5,10 +5,8 @@ Some of the input files must be generated with scripts included in "Analyses/Tar
 ### Panel A
 Input file must be generated via `get_distribution_spacernumber.pl`. Next, the panel can be prepared in R using `plot_coverage.R`.  
 ### Panel B
-Input file is generated with `get_sample_coverage_summary.pl`. Next, the panel can be prepared in R using `plot_coverage.R`.  
-### Panels C & D
-Input files are generated in the folder "Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/". Next, the plot in panels C and D can be prepared in R as indicated in `plot_coverage.R`.  
-### Panel E & G
-Input file is generated with `count_targeting_type_vs_virus_features.pl`. Next, the plots in panel E and G can be prepared in R as indicated in `plot_coverage.R`.  
-### Panel F
-Input file is generated with `prepare_known_host_figure.pl`. Next, the plot in panel F can be prepared in R as indicated in `plot_coverage.R`.  
+Input file is generated with `prepare_known_host_figure.pl`. Next, the plot can be prepared in R as indicated in `plot_coverage.R`.  
+### Panel C
+Input file is generated in the folder "../../../Analyses/Target_IMGVR_IMGPR/Known_hosts/. Next, the plot can be prepared in R as indicated in `plot_coverage.R`.  
+### Panels D & E
+Input file is generated in the folder "../../../Analyses/Target_IMGVR_IMGPR/Beyond_near_exact/. Next, the plots can be prepared in R as indicated in `plot_coverage.R`.  

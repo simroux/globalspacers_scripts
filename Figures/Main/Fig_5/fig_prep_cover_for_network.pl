@@ -7,22 +7,22 @@ my $h=0;
 my $panel="";
 GetOptions ('help' => \$h, 'h' => \$h, 'p=s'=>\$panel); 
 if ($h==1 || $panel eq ""){ # If asked for help or did not set up any argument
-    print "# Script to import the sequences and info we want for the panels C or D in figure 6
+    print "# Script to import the sequences and info we want for the panels A or B in figure 5
 # Arguments :
-# -p: c or d depending on the panel we want
+# -p: a or b depending on the panel we want
 ";
     die "\n";
 }
 
 my $w_dir="";
 my $list_select;
-if ($panel eq "c"){
-    $w_dir="panel_c/";
-    $list_select="list_panel_c";
+if ($panel eq "a"){
+    $w_dir="panel_a/";
+    $list_select="list_panel_a";
 }
-elsif ($panel eq "d"){
-    $w_dir="panel_d/";
-    $list_select="list_panel_d";
+elsif ($panel eq "b"){
+    $w_dir="panel_b/";
+    $list_select="list_panel_b";
 }
 else{die("I don't know this panel\n");}
 
@@ -125,9 +125,9 @@ my %check_uvig;
 my %check_tax;
 print "Loading uvig info and calculating coverage\n";
 open my $sedge,">",$out_file_net_edges;
-print $sedge "node_1\tnode_2\tn_unique\tratio_covered\tmis_cor\n";
+print $sedge "node_1\tnode_2\tn_unique\tratio_covered\tmis_cat\n";
 open my $s1,">",$out_file;
-print $s1 "uvig\ttaxon\tlength\tcovered\tpercent\tn_repeat\tn_unique_spacer\tmedian_hit_per_spacer\tmax_hit\thit_profile\tcorrelation\tcorrelation_cat\n";
+print $s1 "uvig\ttaxon\tlength\tcovered\tpercent\tn_repeat\tn_unique_spacer\tmedian_hit_per_spacer\tmax_hit\thit_profile\tprofile_cat\n";
 foreach my $uvig (sort keys %info_uvig){
     if (defined($store_cover{$uvig})){
         print "Preparing output for $uvig ..\n";
@@ -143,10 +143,15 @@ foreach my $uvig (sort keys %info_uvig){
             if (!defined($store_n{$uvig}{$tax}{"mismatch"}{"3"})){$store_n{$uvig}{$tax}{"mismatch"}{"3"}=0;}
             my $profile=$store_n{$uvig}{$tax}{"mismatch"}{"0"}.";".$store_n{$uvig}{$tax}{"mismatch"}{"1"}.";".$store_n{$uvig}{$tax}{"mismatch"}{"2"}.";".$store_n{$uvig}{$tax}{"mismatch"}{"3"};
             my $n_good=$store_n{$uvig}{$tax}{"mismatch"}{"0"}+$store_n{$uvig}{$tax}{"mismatch"}{"1"};
-            my ($c_c,$cat)=&get_cor($profile);
-            # print $uvig."\t".$tax."\t".$len."\t".$covered."\t".$ratio."\t".$n_repeat."\t".$n_unique."\t".$median_hit."\t".$max_hit."\t".$profile."\t".$c_c."\t".$cat."\n";
-            print $s1 $uvig."\t".$tax."\t".$len."\t".$covered."\t".$ratio."\t".$n_repeat."\t".$n_unique."\t".$median_hit."\t".$max_hit."\t".$profile."\t".$c_c."\t".$cat."\n";
-            if ($panel eq "c"){
+            my $sum=$store_n{$uvig}{$tax}{"mismatch"}{"0"}+$store_n{$uvig}{$tax}{"mismatch"}{"1"}+$store_n{$uvig}{$tax}{"mismatch"}{"2"}+$store_n{$uvig}{$tax}{"mismatch"}{"3"};
+            my $ratio_emp=$n_good/$sum;
+            my $emp_cat="unknown";
+            if ($ratio_emp<=0.5){$emp_cat="mostly_inexact";}
+            elsif($ratio_emp<=0.8){$emp_cat="mixed";}
+            elsif($ratio_emp>0.8){$emp_cat="mostly_exact";}
+            print $uvig."\t".$tax."\t".$len."\t".$covered."\t".$ratio."\t".$n_repeat."\t".$n_unique."\t".$median_hit."\t".$max_hit."\t".$profile."\t".$emp_cat."\n";
+            print $s1 $uvig."\t".$tax."\t".$len."\t".$covered."\t".$ratio."\t".$n_repeat."\t".$n_unique."\t".$median_hit."\t".$max_hit."\t".$profile."\t".$emp_cat."\n";
+            if ($panel eq "a"){
                 ## includes everything with 10 hits or more
                 if ($n_unique>=10 && $n_good>=1){
                     my $clean_uvig=$uvig;
@@ -157,13 +162,13 @@ foreach my $uvig (sort keys %info_uvig){
                         $t[1]=~s/p__//;
                         $t[2]=~s/g__//;
                         my $clean_tax=$t[1].";".$t[2];
-                        print $sedge $clean_uvig."\t".$clean_tax."\t".$n_unique."\t".$ratio."\t".$c_c."\n";
+                        print $sedge $clean_uvig."\t".$clean_tax."\t".$n_unique."\t".$ratio."\t".$emp_cat."\n";
                         $check_uvig{$uvig}=$clean_uvig;
                         $check_tax{$tax}=$clean_tax;
                     }
                 }
             }
-            elsif($panel eq "d"){
+            elsif($panel eq "b"){
                 ## includes everything with 10 hits or more and covering at least 1%
                 ## Also: no unclassified genus
                 if ($n_unique>=10 && $n_good>=1 && $ratio>=1){
@@ -175,7 +180,7 @@ foreach my $uvig (sort keys %info_uvig){
                         $t[1]=~s/p__//;
                         $t[2]=~s/g__//;
                         my $clean_tax=$t[1].";".$t[2];
-                        print $sedge $clean_uvig."\t".$clean_tax."\t".$n_unique."\t".$ratio."\t".$c_c."\n";
+                        print $sedge $clean_uvig."\t".$clean_tax."\t".$n_unique."\t".$ratio."\t".$emp_cat."\n";
                         $check_uvig{$uvig}=$clean_uvig;
                         $check_tax{$tax}=$clean_tax;
                     }
@@ -218,32 +223,6 @@ sub run_cmd(){
     else{
             print " ### dummy run\n";
     }
-}
-
-sub get_cor(){
-    my $xm=1.5;
-    my $xs=5;
-    my $xs_sq=sqrt(5);
-    my @xt=(-1.5,-0.5,0.5,1.5);
-    my @t=split(";",$_[0]);
-    my $sum=$t[0]+$t[1]+$t[2]+$t[3];
-    my $avg=$sum/4;
-    my $cc=0;
-    my $cat="NA";
-    if ($sum>=10){
-        my $num=0;
-        my $den=0;
-        for (my $i=0;$i<=3;$i++){
-            $num+=($t[$i]-$avg)*$xt[$i];
-            $den+=($t[$i]-$avg)*($t[$i]-$avg);
-        }
-        $den=sqrt($den)*$xs_sq;
-        if ($den>0){$cc=$num/$den;}
-        my $slope=$num/$xs;
-        if ($cc>=0.7){$cat="positive";}
-        elsif($cc<=-0.7){$cat="negative";}
-    }
-    return ($cc,$cat);
 }
 
 

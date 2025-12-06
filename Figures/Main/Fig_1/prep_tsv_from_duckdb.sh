@@ -18,6 +18,12 @@ COPY (SELECT * FROM (SELECT sra_run, COUNT(repeat_cluster) AS total_cluster FROM
 
 # Create a file linking repeats to count of samples
 COPY (SELECT * FROM (SELECT repeat_cluster, COUNT(sra_run) AS total_sample FROM array_sample GROUP BY repeat_cluster) AS tmp RIGHT JOIN array_tbl ON (tmp.repeat_cluster == array_tbl.repeat_cluster)) TO 'array_to_sample_counts.tsv' (HEADER, DELIMITER '\t', NULLSTR 'NA');
+# Same but this time counting the number of spacers for each repeat
+COPY (SELECT lca_origin, SUM(total_spacers) as total_spacers FROM (SELECT crispr_array, count(*) as total_spacers FROM spacer_filt_tbl GROUP BY crispr_array) as tmp, array_tbl a WHERE a.repeat_cluster=tmp.crispr_array GROUP BY lca_origin) TO 'lca_origin_to_spacer_count.tsv' (HEADER, DELIMITER '\t');
+# Also counting the number of repeats in each taxonomy category
+COPY (SELECT lca_origin, count(*) AS total FROM array_tbl GROUP BY lca_origin) TO 'lca_origin_to_repeat_count-for-ref.tsv' (HEADER, DELIMITER '\t');
+# And the same count, but including predicted CRISPR type information as well
+COPY (SELECT type, lca_origin, count(*) AS total FROM array_tbl GROUP BY type, lca_origin) TO 'lca_origin_to_type.tsv' (HEADER, DELIMITER '\t');
 
 # Look at distribution of individual spacers across arrays/repeats
 COPY (SELECT n_array, COUNT(n_array) FROM (SELECT spacer_filt_clusters.cluster_id, COUNT(DISTINCT(tmp.crispr_array)) as n_array FROM (SELECT spacer_id, crispr_array, lca_origin, lca_genus FROM spacer_filt_tbl JOIN array_tbl ON array_tbl.repeat_cluster=spacer_filt_tbl.crispr_array) AS tmp JOIN spacer_filt_clusters ON spacer_filt_clusters.spacer_id=tmp.spacer_id GROUP BY spacer_filt_clusters.cluster_id) GROUP BY n_array) TO 'spacer_to_array_counts.tsv' (HEADER, DELIMITER '\t');

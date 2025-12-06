@@ -6,6 +6,9 @@ Compile the statistics on the LCA rank for repeats, based only on genome taxonom
 ## Input preparation for bottom panel
 `./test_error_ngenomes.pl run`  
 Run the subsampling and estimate the consistency of taxonomy for individual repeats for different number of genomes considered.   
+## Input preparation for bottom panel
+`prep_tsv_from_duckdb.sh` in "Main/Fig_1"
+Used to generate the tsv files used in this figure as well
 ## Figures
 `plot_fig_lca_repeat.R`
 in R, to generate the figure  

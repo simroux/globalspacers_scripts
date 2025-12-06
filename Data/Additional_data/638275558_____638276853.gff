@@ -1,0 +1,147 @@
+##gff-version 3
+NC_004735		CDS	76	285	.	-	0	ID=638299327;Product=hypothetical protein;Pfam=
+NC_004735		CDS	289	714	.	-	0	ID=638299328;Product=hypothetical protein;Pfam=
+NC_004735		CDS	779	1033	.	-	0	ID=638299329;Product=hypothetical protein;Pfam=
+NC_004735		CDS	1053	1478	.	-	0	ID=638299330;Product=hypothetical protein;Pfam=
+NC_004735		CDS	2091	3476	.	+	0	ID=638299331;Product=hypothetical protein;Pfam=
+NC_004735		CDS	3445	4395	.	-	0	ID=638299332;Product=hypothetical protein;Pfam=
+NC_004735		CDS	4414	5055	.	-	0	ID=638299333;Product=hypothetical protein;Pfam=
+NC_004735		CDS	5057	5872	.	-	0	ID=638299334;Product=hypothetical protein;Pfam=
+NC_004735		CDS	6065	6949	.	-	0	ID=638299335;Product=hypothetical protein;Pfam=
+NC_004735		CDS	7003	7845	.	-	0	ID=638299336;Product=hypothetical protein;Pfam=
+NC_004735		CDS	7842	8153	.	-	0	ID=638299337;Product=hypothetical protein;Pfam=
+NC_004735		CDS	8212	9168	.	+	0	ID=638299338;Product=5'-3' exonuclease-like protein;Pfam=
+NC_004735		CDS	9165	10619	.	+	0	ID=638299339;Product=glycosyltransferase involved in cell wall biosynthesis;Pfam=
+NC_004735		CDS	10616	11893	.	+	0	ID=638299340;Product=hypothetical protein;Pfam=
+NC_004735		CDS	12032	14008	.	+	0	ID=638299341;Product=hypothetical protein;Pfam=
+NC_004735		CDS	14010	14636	.	+	0	ID=638299342;Product=hypothetical protein;Pfam=
+NC_004735		CDS	14640	15269	.	+	0	ID=638299343;Product=hypothetical protein;Pfam=
+NC_004735		CDS	15266	15760	.	+	0	ID=638299344;Product=Rad52/22 family double-strand break repair protein;Pfam=
+NC_004735		CDS	15785	17035	.	+	0	ID=638299345;Product=DnaB helicase-like protein;Pfam=
+NC_004735		CDS	17032	17826	.	+	0	ID=638299346;Product=hypothetical protein;Pfam=
+NC_004735		CDS	17847	20267	.	+	0	ID=638299347;Product=hypothetical protein;Pfam=
+NC_004735		CDS	20275	21240	.	-	0	ID=638299348;Product=patatin-like phospholipase;Pfam=
+NC_004735		CDS	21258	21992	.	-	0	ID=638299349;Product=hypothetical protein;Pfam=
+NC_004735		CDS	21996	22937	.	-	0	ID=638299350;Product=DNA polymerase family B;Pfam=
+NC_004735		CDS	22900	23292	.	-	0	ID=638299351;Product=hypothetical protein;Pfam=
+NC_004735		CDS	23375	24301	.	+	0	ID=638299352;Product=hypothetical protein;Pfam=
+NC_004735		CDS	24310	25056	.	+	0	ID=638299353;Product=hypothetical protein;Pfam=
+NC_004735		CDS	25085	25387	.	+	0	ID=638299354;Product=hypothetical protein;Pfam=
+NC_004735		CDS	25794	26471	.	+	0	ID=638299355;Product=hypothetical protein;Pfam=
+NC_004735		CDS	26497	26673	.	+	0	ID=638299356;Product=hypothetical protein;Pfam=
+NC_004735		CDS	26648	27154	.	-	0	ID=638299357;Product=tail tube protein gp19;Pfam=
+NC_004735		CDS	27253	29481	.	+	0	ID=638299358;Product=tail sheath protein;Pfam=
+NC_004735		CDS	29547	29996	.	+	0	ID=638299359;Product=hypothetical protein;Pfam=
+NC_004735		CDS	29993	30133	.	-	0	ID=638299360;Product=hypothetical protein;Pfam=
+NC_004735		CDS	30261	30923	.	-	0	ID=638299361;Product=hypothetical protein;Pfam=
+NC_004735		CDS	30998	33343	.	-	0	ID=638299362;Product=hypothetical protein;Pfam=
+NC_004735		CDS	33361	33954	.	-	0	ID=638299363;Product=hypothetical protein;Pfam=
+NC_004735		CDS	33951	35552	.	-	0	ID=638299364;Product=capsid assembly protein Gp20;Pfam=
+NC_004735		CDS	35631	37496	.	+	0	ID=638299365;Product=hypothetical protein;Pfam=
+NC_004735		CDS	37857	37997	.	+	0	ID=638299366;Product=hypothetical protein;Pfam=
+NC_004735		CDS	37985	38311	.	+	0	ID=638299367;Product=hypothetical protein;Pfam=
+NC_004735		CDS	38371	38778	.	+	0	ID=638299368;Product=hypothetical protein;Pfam=
+NC_004735		CDS	38795	39085	.	+	0	ID=638299369;Product=hypothetical protein;Pfam=
+NC_004735		CDS	39213	40106	.	+	0	ID=638299370;Product=hypothetical protein;Pfam=
+NC_004735		CDS	40334	40660	.	+	0	ID=638299371;Product=hypothetical protein;Pfam=
+NC_004735		CDS	40994	41290	.	+	0	ID=638299372;Product=hypothetical protein;Pfam=
+NC_004735		CDS	41361	41582	.	+	0	ID=638299373;Product=hypothetical protein;Pfam=
+NC_004735		CDS	41579	41809	.	+	0	ID=638299374;Product=hypothetical protein;Pfam=
+NC_004735		CDS	41811	42071	.	+	0	ID=638299375;Product=hypothetical protein;Pfam=
+NC_004735		CDS	42087	42347	.	+	0	ID=638299376;Product=hypothetical protein;Pfam=
+NC_004735		CDS	42543	42761	.	+	0	ID=638299377;Product=hypothetical protein;Pfam=
+NC_004735		CDS	42763	42942	.	+	0	ID=638299378;Product=hypothetical protein;Pfam=
+NC_004735		CDS	43172	43396	.	+	0	ID=638299379;Product=hypothetical protein;Pfam=
+NC_004735		CDS	43383	43700	.	+	0	ID=638299380;Product=hypothetical protein;Pfam=
+NC_004735		CDS	43700	43972	.	+	0	ID=638299381;Product=hypothetical protein;Pfam=
+NC_004735		CDS	44172	44456	.	+	0	ID=638299382;Product=hypothetical protein;Pfam=
+NC_004735		CDS	44481	45017	.	+	0	ID=638299383;Product=predicted transposase;Pfam=
+NC_004735		CDS	44968	45708	.	+	0	ID=638299384;Product=IS605 OrfB family transposase;Pfam=
+NC_004735		CDS	45740	47158	.	+	0	ID=638299385;Product=hypothetical protein;Pfam=
+NC_004735		CDS	47588	47791	.	+	0	ID=638299386;Product=hypothetical protein;Pfam=
+NC_004735		CDS	47805	49211	.	+	0	ID=638299387;Product=hypothetical protein;Pfam=
+NC_004735		CDS	49211	49591	.	+	0	ID=638299388;Product=hypothetical protein;Pfam=
+NC_004735		CDS	49595	50578	.	-	0	ID=638299389;Product=hypothetical protein;Pfam=
+NC_004735		CDS	50664	51695	.	-	0	ID=638299390;Product=hypothetical protein;Pfam=
+NC_004735		CDS	52498	53364	.	+	0	ID=638299391;Product=hypothetical protein;Pfam=
+NC_004735		CDS	53361	54887	.	+	0	ID=638299392;Product=phage FluMu gp28-like protein;Pfam=
+NC_004735		CDS	54965	56341	.	+	0	ID=638299393;Product=hypothetical protein;Pfam=
+NC_004735		CDS	56345	56563	.	+	0	ID=638299394;Product=hypothetical protein;Pfam=
+NC_004735		CDS	56567	59419	.	+	0	ID=638299395;Product=hypothetical protein;Pfam=
+NC_004735		CDS	59429	60130	.	+	0	ID=638299396;Product=hypothetical protein;Pfam=
+NC_004735		CDS	60121	61323	.	-	0	ID=638299397;Product=hypothetical protein;Pfam=
+NC_004735		CDS	61330	61662	.	-	0	ID=638299398;Product=hypothetical protein;Pfam=
+NC_004735		CDS	61650	62342	.	-	0	ID=638299399;Product=thymidine kinase;Pfam=
+NC_004735		CDS	62339	63031	.	-	0	ID=638299400;Product=hypothetical protein;Pfam=
+NC_004735		CDS	63035	64414	.	-	0	ID=638299401;Product=hypothetical protein;Pfam=
+NC_004735		CDS	64442	64828	.	+	0	ID=638299402;Product=hypothetical protein;Pfam=
+NC_004735		CDS	64825	66276	.	+	0	ID=638299403;Product=hypothetical protein;Pfam=
+NC_004735		CDS	66276	67547	.	+	0	ID=638299404;Product=hypothetical protein;Pfam=
+NC_004735		CDS	67567	69180	.	+	0	ID=638299405;Product=hypothetical protein;Pfam=
+NC_004735		CDS	69182	70168	.	+	0	ID=638299406;Product=hypothetical protein;Pfam=
+NC_004735		CDS	70165	70431	.	+	0	ID=638299407;Product=hypothetical protein;Pfam=
+NC_004735		CDS	70435	71958	.	-	0	ID=638299408;Product=hypothetical protein;Pfam=
+NC_004735		CDS	71971	74013	.	-	0	ID=638299409;Product=hypothetical protein;Pfam=
+NC_004735		CDS	74048	74269	.	-	0	ID=638299410;Product=hypothetical protein;Pfam=
+NC_004735		CDS	74262	75968	.	-	0	ID=638299411;Product=hypothetical protein;Pfam=
+NC_004735		CDS	75958	76671	.	-	0	ID=638299412;Product=hypothetical protein;Pfam=
+NC_004735		CDS	76661	76978	.	-	0	ID=638299413;Product=hypothetical protein;Pfam=
+NC_004735		CDS	77043	77411	.	+	0	ID=638299414;Product=hypothetical protein;Pfam=
+NC_004735		CDS	77415	78503	.	+	0	ID=638299415;Product=hypothetical protein;Pfam=
+NC_004735		CDS	78796	79041	.	-	0	ID=638299416;Product=hypothetical protein;Pfam=
+NC_004735		CDS	79061	79573	.	-	0	ID=638299417;Product=hypothetical protein;Pfam=
+NC_004735		CDS	79587	81155	.	-	0	ID=638299418;Product=DNA polymerase family B;Pfam=
+NC_004735		CDS	81173	81727	.	-	0	ID=638299419;Product=hypothetical protein;Pfam=
+NC_004735		CDS	81749	82252	.	-	0	ID=638299420;Product=hypothetical protein;Pfam=
+NC_004735		CDS	82249	82578	.	-	0	ID=638299421;Product=hypothetical protein;Pfam=
+NC_004735		CDS	82627	82896	.	+	0	ID=638299422;Product=hypothetical protein;Pfam=
+NC_004735		CDS	82893	83438	.	-	0	ID=638299423;Product=hypothetical protein;Pfam=
+NC_004735		CDS	83463	85046	.	-	0	ID=638299424;Product=hypothetical protein;Pfam=
+NC_004735		CDS	85114	85677	.	-	0	ID=638299425;Product=hypothetical protein;Pfam=
+NC_004735		CDS	85689	88748	.	-	0	ID=638299426;Product=hypothetical protein;Pfam=
+NC_004735		CDS	88733	89665	.	-	0	ID=638299427;Product=hypothetical protein;Pfam=
+NC_004735		CDS	89685	90290	.	-	0	ID=638299428;Product=hypothetical protein;Pfam=
+NC_004735		CDS	90293	91609	.	-	0	ID=638299429;Product=RNA ligase-like protein;Pfam=
+NC_004735		CDS	91706	93718	.	-	0	ID=638299430;Product=helicase-like protein;Pfam=
+NC_004735		CDS	93756	95549	.	-	0	ID=638299431;Product=hypothetical protein;Pfam=
+NC_004735		CDS	95567	96337	.	-	0	ID=638299432;Product=hypothetical protein;Pfam=
+NC_004735		CDS	96334	96546	.	-	0	ID=638299433;Product=hypothetical protein;Pfam=
+NC_004735		CDS	96543	97382	.	-	0	ID=638299434;Product=MoaA/NifB/PqqE/SkfB family radical SAM enzyme;Pfam=
+NC_004735		CDS	97507	97893	.	-	0	ID=638299435;Product=hypothetical protein;Pfam=
+NC_004735		CDS	98060	99145	.	+	0	ID=638299436;Product=AAA domain-containing protein;Pfam=
+NC_004735		CDS	99207	101879	.	+	0	ID=638299437;Product=hypothetical protein;Pfam=
+NC_004735		CDS	101876	102214	.	-	0	ID=638299438;Product=hypothetical protein;Pfam=
+NC_004735		CDS	102281	103894	.	+	0	ID=638299439;Product=hypothetical protein;Pfam=
+NC_004735		CDS	103891	104784	.	-	0	ID=638299440;Product=hypothetical protein;Pfam=
+NC_004735		CDS	104781	105314	.	-	0	ID=638299441;Product=prohead core protein serine protease;Pfam=
+NC_004735		CDS	105320	106189	.	-	0	ID=638299442;Product=hypothetical protein;Pfam=
+NC_004735		CDS	106239	107363	.	-	0	ID=638299443;Product=hypothetical protein;Pfam=
+NC_004735		CDS	107388	108926	.	-	0	ID=638299444;Product=hypothetical protein;Pfam=
+NC_004735		CDS	108935	110920	.	-	0	ID=638299445;Product=hypothetical protein;Pfam=
+NC_004735		CDS	110970	111734	.	-	0	ID=638299446;Product=hypothetical protein;Pfam=
+NC_004735		CDS	111734	111943	.	-	0	ID=638299447;Product=hypothetical protein;Pfam=
+NC_004735		CDS	111977	112654	.	-	0	ID=638299448;Product=hypothetical protein;Pfam=
+NC_004735		CDS	112699	112995	.	+	0	ID=638299449;Product=hypothetical protein;Pfam=
+NC_004735		CDS	112985	114136	.	-	0	ID=638299450;Product=UDP-galactopyranose mutase;Pfam=
+NC_004735		CDS	114133	115170	.	-	0	ID=638299451;Product=hypothetical protein;Pfam=
+NC_004735		CDS	115160	115525	.	-	0	ID=638299452;Product=hypothetical protein;Pfam=
+NC_004735		CDS	115567	116274	.	-	0	ID=638299453;Product=hypothetical protein;Pfam=
+NC_004735		CDS	116276	117526	.	-	0	ID=638299454;Product=hypothetical protein;Pfam=
+NC_004735		CDS	117531	118148	.	-	0	ID=638299455;Product=hypothetical protein;Pfam=
+NC_004735		CDS	118170	118571	.	-	0	ID=638299456;Product=hypothetical protein;Pfam=
+NC_004735		CDS	118648	119274	.	-	0	ID=638299457;Product=hypothetical protein;Pfam=
+NC_004735		CDS	119380	119799	.	+	0	ID=638299458;Product=hypothetical protein;Pfam=
+NC_004735		CDS	119839	120015	.	-	0	ID=638299459;Product=hypothetical protein;Pfam=
+NC_004735		CDS	120098	120673	.	-	0	ID=638299460;Product=hypothetical protein;Pfam=
+NC_004735		CDS	120676	121569	.	-	0	ID=638299461;Product=thymidylate synthase-like protein;Pfam=
+NC_004735		CDS	121826	122263	.	-	0	ID=638299462;Product=hypothetical protein;Pfam=
+NC_004735		CDS	122268	122618	.	-	0	ID=638299463;Product=hypothetical protein;Pfam=
+NC_004735		CDS	122721	123866	.	+	0	ID=638299464;Product=dynein-related subfamily AAA family protein;Pfam=
+NC_004735		CDS	123873	125156	.	+	0	ID=638299465;Product=hypothetical protein;Pfam=
+NC_004735		CDS	125153	125494	.	+	0	ID=638299466;Product=hypothetical protein;Pfam=
+NC_004735		CDS	125569	127140	.	-	0	ID=638299467;Product=major capsid protein Gp23;Pfam=
+NC_004735		CDS	127198	128046	.	-	0	ID=638299468;Product=hypothetical protein;Pfam=
+NC_004735		CDS	128219	128302	.	-	0	ID=638299469;Product=hypothetical protein;Pfam=
+NC_004735		CDS	128329	128928	.	-	0	ID=638299470;Product=RNA polymerase sigma factor (sigma-70 family);Pfam=
+NC_004735		CDS	128944	129408	.	-	0	ID=638299471;Product=hypothetical protein;Pfam=
+NC_004735		CDS	129771	129866	.	-	0	ID=638299472;Product=hypothetical protein;Pfam=

@@ -8,7 +8,7 @@ CREATE INDEX lib_id_ix ON sample_tbl (library);
 DESCRIBE sample_tbl;
 
 ### Load array info
-CREATE TABLE array_tbl AS FROM read_csv('Data/Spacer_db/Array_info_filtered_for_db-Nov1-24.tsv', header = true, delim='\t');
+CREATE TABLE array_tbl AS FROM read_csv('Data/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv', header = true, delim='\t');
 CREATE UNIQUE INDEX array_id_ix ON array_tbl (repeat_cluster);
 DESCRIBE array_tbl;
 

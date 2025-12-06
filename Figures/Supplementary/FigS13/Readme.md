@@ -6,14 +6,12 @@ The second step is to prepare the file for the spacer hits. First, use `get_sing
 
 For Fig. S13, the following commands were used:
 ```
-./get_input_gggenomes.pl -i IMGVR_UViG_3300007356_000002
-python get_single_virus_table.py -i IMGVR_UViG_3300007356_000002
-./filter_hit_table.pl -i IMGVR_UViG_3300007356_000002_spacer_hits_full.tsv -a Ac_12820
+./get_input_gggenomes.pl -i IMGVR_UViG_638275558_000001
+python get_single_virus_table.py -i IMGVR_UViG_638275558_000001
 ```
 and
 ```
-./get_input_gggenomes.pl -i IMGVR_UViG_3300045988_178767 
-python get_single_virus_table.py -i IMGVR_UViG_3300045988_178767
-./filter_hit_table.pl -i IMGVR_UViG_3300045988_178767_spacer_hits_full.tsv -a Ac_16888
+./get_input_gggenomes.pl -i IMGVR_UViG_2911423748_000003 
+python get_single_virus_table.py -i IMGVR_UViG_2911423748_000003
 ```
 then use `plot_spacer_matches.R` to prepare the plot panels.

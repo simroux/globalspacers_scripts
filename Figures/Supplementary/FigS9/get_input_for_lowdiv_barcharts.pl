@@ -15,7 +15,7 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 }
 
 ### NOTE - we use "frozen" sometimes in there, but it's really "low diversity" (becomes frozen if it's low diversity across samples, that's a next step)
-my $file_array_info="Data/Spacer_db/Array_info_filtered_for_db-Nov1-24.tsv";
+my $file_array_info="Data/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
 my $file_sample_info="Data/Spacer_db/Runs_to_ecosystem_and_sequencing_and_study_for_db-Jul28-24.tsv";
 my $in_alpha_base="Analyses/Spacer_database/spacer_sets_alphadiv.tsv";
 

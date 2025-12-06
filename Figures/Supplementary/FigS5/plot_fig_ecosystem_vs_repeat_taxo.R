@@ -64,3 +64,45 @@ ggplot(df_genus_eco,aes(x=ecosystem_sum,y=pretty_genus)) + geom_tile(aes(fill=fr
 ## Test palettes: GnBu
 ggsave("Fig_S5_draft_Genus_vs_ecosystem_vs_array_frequency.pdf",width=6,height=7)
 
+
+
+## Second part of the figure: heatmap of CRISPR Type detection per ecosystem
+df_type_eco<-read.delim("type_vs_ecosystem.txt",stringsAsFactors = T)
+df_type_eco$ecosystem_sum<-factor(df_type_eco$ecosystem_sum,ordered=T,levels=levels_ecosystem)
+df_type_eco <- df_type_eco %>%
+  separate_wider_delim(type, "-", names = c("type_simple"), too_many = "drop") 
+df_type_eco$type_simple <- factor(df_type_eco$type_simple,ordered=T,levels=rev(c("Unknown","VI","V","IV","III","II","I")))
+# Remove unclassified genera and unknown ecosystems
+df_type_eco <- df_type_eco %>%
+  filter(ecosystem_sum!="Unknown") %>%
+  filter(ecosystem_sum!="Other") 
+# Calculate frequency of type per ecosystem
+df_type_eco <- df_type_eco %>%
+  group_by(ecosystem_sum, type_simple) %>%
+  summarise(n=sum(n_occurrences)) %>%
+  mutate(freq = n / sum(n) * 100) 
+p3 <- ggplot(df_type_eco,aes(x=type_simple,y=ecosystem_sum)) + geom_tile(aes(fill=freq)) + blank_theme + theme(axis.text.x=element_text(angle=90,vjust=0.5,hjust=1)) + scale_fill_distiller(palette="GnBu",direction=1,name="Frequency in ecosystem (%)",na.value="white") + scale_linewidth(range=c(0,1)) + guides(linewidth = "none") + theme(legend.position="bottom") + xlab("CRISPR repeat - predicted type") + ylab("Ecosystem type")
+# Calculate a ratio observe/expected (under uniform distribution)
+tmp <- df_type_eco %>%
+  select(ecosystem_sum, type_simple, n) %>%
+  pivot_wider(names_from=type_simple,values_from=n,values_fill=0)
+m_type_eco <- as.matrix(tmp[c(1:nrow(tmp)),c(2:ncol(tmp))])
+row.names(m_type_eco) <- tmp$ecosystem_sum
+m_type_eco
+csq_type_eco <- chisq.test(m_type_eco)
+df_type_eco_oe <- data.frame(csq_type_eco$observed/csq_type_eco$expected)
+df_type_eco_oe$ecosystem_sum <- factor(row.names(df_type_eco_oe),ordered=T,levels=levels_ecosystem)
+df_type_eco_oe <- df_type_eco_oe %>%
+  pivot_longer(cols = !ecosystem_sum, names_to="type_simple")
+df_type_eco_oe$type_simple <- factor(df_type_eco_oe$type_simple,ordered=T,levels=rev(c("Unknown","VI","V","IV","III","II","I")))
+p4 <- ggplot(df_type_eco_oe,aes(x=type_simple,y=ecosystem_sum)) + geom_tile(aes(fill=value)) + blank_theme + theme(axis.text.x=element_text(angle=90,vjust=0.5,hjust=1)) + scale_fill_distiller(palette="PuOr",direction=1,name="Observed/Expected ratio",na.value="white") + scale_linewidth(range=c(0,1)) + guides(linewidth = "none") + theme(legend.position="bottom") + xlab("CRISPR repeat - predicted type") + ylab("Ecosystem type")
+## Make this bottom panel
+gp3 <- ggplot_gtable(ggplot_build(p3))
+gp4 <- ggplot_gtable(ggplot_build(p4))
+gp4$widths <- gp3$widths
+gp4$heights <- gp3$heights
+##
+grid.arrange(gp3,gp4,ncol=2)
+pdf("Fig_S5_bottom_panel.pdf",width=9,height=5)
+grid.arrange(gp3,gp4,ncol=2)
+dev.off()

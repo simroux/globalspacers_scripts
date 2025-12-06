@@ -1,33 +1,39 @@
-Type	PAM (upstream)	PAM (downstream)	Size
-I-A	CCN	NGG	2
-I-B	CCN	NGG	2
-I-B	TNA	TNA	2
-I-C	TTC	GAA	3
-I-C	TTCN	NGAA	3
-I-D	GTN	NAC	2
-I-E	AAN	NTT	2
-I-E	NAA	TTN	2
-I-F	NCC	GGN	2
-I-F	CCN	NGG	2
-I-F_T	NCC	GGN	2
-I-F_T	CCN	NGG	2
-I-G	TTN	NAA	2
-II-A	NAA	TTN	2
-II-A	CCN	NGG	2
-II-B	CCN	NGG	2
-III-C	TTN	NAA	2
-IV-A1	AAG	CTT	3
-IV-A2	NCC	GGN	2
-IV-A2	NAA	TTN	2
-IV-A3	AAN	NTT	2
-IV-D	AAG	CTT	3
-IV-E	TTA	TAA	3
-V-A	TTN	NAA	2
-V-B1	ATN	NAT	2
-V-F1	TTN	NAA	2
-V-F1	CCN	NGG	2
-V-F2	AAN	NTT	2
-V-F2	TTN	NAA	2
-V-F3	GTN	NAC	2
-VI-C	CCN	NGG	2
-VI-D	TTNNN	NNNAA	2
+Type	PAM (upstream)	PAM (downstream)	Size	Source	Motif type	Orientation (known or predicted)
+I-B	CCN	NGG	2	Rybnicky C. difficile	Published	upstream
+I-B	TTN	NAA	2	Rybnicky H. thermocellum	Published	upstream
+I-B	TCN	NGA	2	Rybnicky C. pasteurianum	Published	upstream
+I-C	TC	GA	2	Leenay B. halodurans	Published	upstream
+I-E	ANG	CNT	2	Leenay E. Coli	Published	upstream
+I-E	AG	CT	2	Leenay E. Coli	Published	upstream
+I-E	AA	TT	2	Rybnicky L. crispatus	Published	upstream
+I-F	CC	GG	2	Rybnicky A. baumannii, P. aeruginosa	Published	upstream
+II-C	TNTNN	NNANA	1	Rybnicky C. jejuni	Published	downstream
+II-A	CNN	NNG	1	Leenay S. pyogenes, Rybnicky S. canis	Published	downstream
+II-A	CNNN	NNNG	1	Leenay S. auerus	Published	downstream
+II-B	CCN	NGG	2	Hirano F. novicida	Published	downstream
+IV-A	AAN	NTT	2	Guo P. oleovorans	Published	upstream
+V-A	TTN	NAA	2	Leenay/Rybnicky F. novicida, F. tularensis, M. bovoculi	Published	upstream
+# 						
+I-A	CCN	NGG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-A	CCNN	NNGG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-B	CCNN	NNGG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-C	TTN	NAA	2	Detected in data, variant of I-C TTC	Data-driven	upstream
+I-C	TCN	NGA	2	Detected in data, variant of I-C TTC	Data-driven	upstream
+I-D	TC	GA	2	Detected in data, variant of I-C TC	Data-driven	upstream
+I-D	GTN	NAC	2	Detected in data, variant of XX	Data-driven	upstream
+I-D	GTNN	NNAC	2	Detected in data, variant of XX	Data-driven	upstream
+I-E	AAN	NTT	2	Detected in data, variant of I-E AAG	Data-driven	upstream
+I-E	AAC	GTT	2	Detected in data, variant of I-E AAG	Data-driven	upstream
+I-F	CCN	NGG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-F	CC	GG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-F_T	CCN	NGG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-F_T	CC	GG	2	Detected in data, similar to I-B CCN	Data-driven	upstream
+I-G	TTN	NAA	2	Detected in data, similar to I-B TTN	Data-driven	upstream
+I-G	TC	GA	2	Detected in data, similar to I-C TC	Data-driven	upstream
+II-A	TNNN	NNNA	1	Detected in data, similar to II-C TNNNN	Data-driven	downstream
+II-B	CCNN	NNGG	2	Detected in data, similar to II-B CCN	Data-driven	downstream
+II-C	TNNNN	NNNNA	1	Detected in data, similar to II-C TNNNN	Data-driven	downstream
+II-C	TNN	NNA	1	Detected in data, similar to II-C TNNNN	Data-driven	downstream
+II-C	TN	NA	1	Detected in data, similar to II-C TNNNN	Data-driven	downstream
+V-A	TTNN	NNAA	2	Detected in data, similar to V-A TTN	Data-driven	upstream
+II-A	TNNNN	NNNNA	1	Detected in data, similar to II-C TNNNN	Data-driven	downstream

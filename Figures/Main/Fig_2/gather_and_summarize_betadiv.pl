@@ -27,7 +27,7 @@ my $n_array_to_subsample=100;
 my $out_file="spacer_sets_betadiv_forplot_subsamples.tsv";
 my $out_file_stats="spacer_sets_betadiv_forplot_subsamples-summarized.tsv";
 
-my $file_array_info="Data/Spacer_db/Array_info_filtered_for_db-Nov1-24.tsv";
+my $file_array_info="Data/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
 my $file_sample_info="Data/Spacer_db/Runs_to_ecosystem_and_sequencing_and_study_for_db-Jul28-24.tsv";
 
 my $in_spacer_base="Analyses/Spacer_database/spacer_clusters_and_metadata_for_alphadiv.tsv";

@@ -33,3 +33,36 @@ gpr1$widths<-gpr2$widths
 pdf("Fig_S1_draft.pdf")
 grid.arrange(arrangeGrob(gpi, gpm, nrow=1, ncol=2), gpr1, gpr2, nrow=3, ncol=1)
 dev.off()
+
+### Show the content of the database in terms of repeat, spacer, and repeat types
+# left
+df_lcao_repeat <- read.delim("../../Main/Fig_1/lca_origin_to_repeat_count-for-ref.tsv", stringsAsFactors = T)
+df_lcao_repeat$lca_origin <- factor(df_lcao_repeat$lca_origin,ordered=T,levels=levels_taxo)
+p1 <- ggplot(df_lcao_repeat) + geom_bar(aes(x=lca_origin,y=total),col="black",fill="black",stat="identity") + scale_y_continuous(labels=scales::comma) + xlab("Predicted CRISPR repeat origin and taxonomic assignment confidence") + ylab("Number of predicted CRISPR repeats") + coord_flip() + blank_theme
+# center
+df_lcao_spacer <- read.delim("../../Main/Fig_1/lca_origin_to_spacer_count.tsv", stringsAsFactors = T)
+df_lcao_spacer$lca_origin <- factor(df_lcao_spacer$lca_origin,ordered=T,levels=levels_taxo)
+p2 <- ggplot(df_lcao_spacer) + geom_bar(aes(x=lca_origin,y=total_spacers),col="black",fill="black",stat="identity")  + scale_y_continuous(labels=scales::comma) + xlab("Predicted CRISPR repeat origin and taxonomic assignment confidence") + ylab("Number of CRISPR spacers identified across SRA") + coord_flip() + blank_theme
+# right
+df_lcao_type <- read.delim("../../Main/Fig_1/lca_origin_to_type.tsv")
+df_lcao_type$type <- factor(df_lcao_type$type,ordered=T,levels=unique(df_lcao_type$type))
+df_lcao_type <- df_lcao_type %>%
+  separate_wider_delim(type, "-", names = c("type_simple"), too_many = "drop") 
+df_lcao_type$type_simple <- factor(df_lcao_type$type_simple,ordered=T,levels=c("Unknown","VI","V","IV","III","II","I"))
+df_lcao_type$lca_origin <- factor(df_lcao_type$lca_origin,ordered=T,levels=levels_taxo)
+df_lcao_type_forplot <- df_lcao_type %>%
+  group_by(type_simple,lca_origin) %>%
+  summarise(total=sum(total))
+p3 <- ggplot(df_lcao_type_forplot) + geom_bar(aes(x=lca_origin,y=total,fill=type_simple),stat="identity",col="black",position="fill") + blank_theme + scale_y_continuous(labels=scales::percent) + scale_fill_manual(values=scale_type) + xlab("Predicted CRISPR type") + ylab("Percentage of CRISPR repeats") + coord_flip() + theme(axis.ticks.y = element_blank(),axis.text.y = element_blank(),legend.position="bottom")
+
+## Plot all in one panel
+gp1 <- ggplot_gtable(ggplot_build(p1))
+gp2 <- ggplot_gtable(ggplot_build(p2))
+gp3 <- ggplot_gtable(ggplot_build(p3))
+## Make sure everything is lined up
+gp1$heights<-gp3$heights
+gp2$heights<-gp3$heights
+
+pdf("Fig_S1B_draft.pdf",width=9,height=2.5)
+grid.arrange(gp1,gp2,gp3,nrow=1)
+dev.off()

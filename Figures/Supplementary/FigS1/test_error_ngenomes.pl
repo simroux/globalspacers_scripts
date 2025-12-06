@@ -15,7 +15,7 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 
 
 my $array_file="rData/Additional_data/epeats_to_genome_contigs.tsv";
-my $repeat_file="Data/Spacer_db/Array_info_filtered_for_db-Nov1-24.tsv";
+my $repeat_file="Data/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
 my $genome_file="Data/Additional_data/all_genome_info.nometag.tsv";
 my $out_file_aggregated="aggregated_stats_subsampling-all.tsv";
 

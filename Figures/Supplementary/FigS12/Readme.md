@@ -1,3 +1,5 @@
 # How-to - reconstruct panels of Fig. S12
-For this supplementary figure, we re-use two files generated as part of Fig. 3: "Summary_PAM_detection_by_spacer.tsv" and "Summary_PAM_detection_by_type.tsv". The script to generate these files is `clean_up_and_summarize_array_PAM_stats.pl` in the "Main/Fig_3/" folder.  
-Next, we use R and the commands listed in `plot_PAM_detailed.R` to generate the 3 panels of Fig. S12.  
+For this supplementary figure, we re-use the file "Stat_motif_detection.tsv" generated as part of Fig. 3.script to generate these files is (see scripts in the "Analyses/Target_IMGVR_IMGPR/PAM_detection/" folder.  
+Next, we use R and the commands listed in `plot_PAM_detailed.R` to generate the main panel of Fig. S12.  
+For the specific motifs on the right side, the list is taken from the file "Detailed_stats_motifs.tsv", in the same "Analyses/Target_IMGVR_IMGPR/PAM_detection/" folder.  
+

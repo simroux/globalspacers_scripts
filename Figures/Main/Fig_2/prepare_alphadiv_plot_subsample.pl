@@ -23,7 +23,7 @@ my $min_max_cover=20;
 my $to_subsample=100;
 my $to_subsample_spacers=1000;
 
-my $file_array_info="Data/Spacer_db/Array_info_filtered_for_db-Apr12-24.tsv";
+my $file_array_info="Data/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
 my $file_sample_info="Data/Spacer_db/Runs_to_ecosystem_and_sequencing_and_study_for_db-Jul28-24.tsv";
 
 my $in_alpha_base="Analyses/Spacer_database/spacer_sets_alphadiv.tsv";

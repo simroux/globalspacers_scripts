@@ -23,7 +23,7 @@ my $targeting_file="../Target_coverage/plasmid_complete_coverage_by_spacer.tsv";
 my $info_plasmid_file="../../../Data/Spacer_db/IMGVR_sequence_information_Oct17.tsv";
 
 my $out_file="Plasmid_to_repeat_hits_profile.tsv";
-my $out_file_step2="Plasmid_to_repeat_hits_profile-medium_with_cc.tsv";
+my $out_file_step2="Plasmid_to_repeat_hits_profile-medium_with_cat.tsv";
 
 my %sp_to_array;
 my %count;
@@ -97,18 +97,11 @@ while(<$tsv>){
 }
 close $tsv;
 
-
-## Need this for correlation computations
-my $xm=1.5;
-my $xs=5;
-my $xs_sq=sqrt(5);
-my @xt=(-1.5,-0.5,0.5,1.5);
-
 print "######### Preparing output\n";
 open my $s1,">",$out_file;
 print $s1 "plasmid\tarray\tn_hit_0\tn_hit_1\tn_hit_2\tn_hit_3\n";
 open my $s2,">",$out_file_step2;
-print $s2 "plasmid\tarray\tn_hit_0\tn_hit_1\tn_hit_2\tn_hit_3\ttotal\tcc\tslope\tcategory\n";
+print $s2 "plasmid\tarray\tn_hit_0\tn_hit_1\tn_hit_2\tn_hit_3\ttotal\tratio\tcategory\n";
 foreach my $plasmid (keys %count){
     foreach my $array (keys %{$count{$plasmid}}){
         if (!defined($count{$plasmid}{$array}{0})){$count{$plasmid}{$array}{0}=0;}
@@ -120,25 +113,13 @@ foreach my $plasmid (keys %count){
         if ($check{$plasmid}{$array}==1){
             my @t=($count{$plasmid}{$array}{0},$count{$plasmid}{$array}{1},$count{$plasmid}{$array}{2},$count{$plasmid}{$array}{3});
             my $sum=$t[0]+$t[1]+$t[2]+$t[3];
-            my $avg=$sum/4;
-            if ($sum>=10){
-                my $num=0;
-                my $den=0;
-                for (my $i=0;$i<=3;$i++){
-                    $num+=($t[$i]-$avg)*$xt[$i];
-                    $den+=($t[$i]-$avg)*($t[$i]-$avg);
-                }
-                $den=sqrt($den)*$xs_sq;
-                my $cc=0;
-                if ($den>0){$cc=$num/$den;}
-                my $slope=$num/$xs;
-                my $cat="NA";
-                if ($cc>=0.7){$cat="positive";}
-                elsif($cc<=-0.7){$cat="negative";}
-                # print join(" ",@t)."\t".$cc."\t".$slope."\n";
-                $line=$line."\t".$sum."\t".$cc."\t".$slope."\t".$cat;
-                print $s2 $line."\n";
-            }
+            my $ratio=($t[0]+$t[1])/$sum;
+            my $cat="unknown";
+            if ($ratio<=0.5){$cat="mostly_inexact";}
+            elsif($ratio<=0.8){$cat="mixed";}
+            elsif($ratio>0.8){$cat="mostly_exact";}
+            $line=$line."\t".$sum."\t".$ratio."\t".$cat;
+            print $s2 $line."\n";
         }
     }
 }

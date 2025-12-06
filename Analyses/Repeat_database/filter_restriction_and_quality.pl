@@ -13,39 +13,66 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
 	die "\n";
 }
 
-my $filtered_list="all_repeats_clstr-filtered-clean.tab";
-my $info_and_complex="Repeat_QC/Array_info_with_complexity_for_db.tsv";
-my $taxo_info="Phylodist/all_repeats_clstr-filtered-clean_wlca_phylodist.tab";
-my $updated_confidence="Updated_LCA_confidence.tsv";
-## Note - for taxo, we will expand the lca status to an lca origin -> goes from confidence (Low/high) to Genome_high, Genome_low, Contig
+my $filtered_list="all_repeats_clstr.tab";
+my $info_and_complex="Array_info_with_complexity_for_db.tsv"; ## Results of "check_repeat_complexity.py"
+my $taxo_info="contig_wlca_phylodist.tab"; ## File listing all taxonomic assignments from relevant contigs, to help with assigning taxonomy beyond genomes
+my $genome_file="all_genome_info.tsv"; ## File with source information on each genome (i.e. isolate vs MAG)
+## Note - for taxo, we will expand the lca status to an lca origin -> goes from confidence (Low/high) to Genome_high, Genome_medium, Genome_low, Contig
 ## We will also exclude everything that is Euk and Viruses outside of the Caudoviricetes
 
 
 my $out_file="Array_info_filtered_for_db.tsv";
 
+
+my %info_genome;
+print "Reading genome file $genome_file\n";
+open my $tsv,"<",$genome_file;
+while(<$tsv>){
+    chomp($_);
+    my @tab=split("\t",$_);
+    if ($tab[0] eq "Contig"){next;}
+    $info_genome{$tab[1]}{"type"}=$tab[3];
+    $info_genome{$tab[1]}{"taxo"}=$tab[4];
+}
+close $tsv;
+
 my %check;
 my %store;
+my %tmp;
+print "Reading repeat file $filtered_list\n";
 open my $tsv,"<",$filtered_list;
 while(<$tsv>){
     chomp($_);
     my @tab=split("\t",$_);
     $check{$tab[1]}=1;
     $store{$tab[1]}{"type"}=$tab[3];
-    $store{$tab[1]}{"lca_confidence"}=$tab[8];
+    ## We update the lca confidence based on the genome information previously loaded
+    my @list_genomes=split(";",$tab[8]);
+    %tmp=();
+    foreach my $genome (@list_genomes){
+        if ($info_genome{$genome}{"taxo"} ne "NA"){
+            $tmp{"total_taxo"}++;
+            $tmp{$info_genome{$genome}{"type"}}++;
+        }
+    }
+    if ($tmp{"total_taxo"}>=4 && $tmp{"Isolate"}>=4){
+        print "4 or more isolate genomes with some taxo, we consider the LCA to be high confidence\n";
+        $store{$tab[1]}{"lca_confidence"}="High-confidence";
+    }
+    elsif ($tmp{"total_taxo"}>=4 || (defined($tmp{"Isolate"}) && $tmp{"Isolate"}>=1)){
+        print "4 or more genomes or at least 1 isolate, we consider the LCA to be medium confidence\n";
+        $store{$tab[1]}{"lca_confidence"}="Medium-confidence";
+    }
+    else{
+        print "Less than 4 genomes and 0 isolates, i.e. all of these are bins, we consider as low-confidence\n";
+        $store{$tab[1]}{"lca_confidence"}="Low-confidence";
+    }
     $store{$tab[1]}{"lca"}=$tab[7];
 }
 close $tsv;
 
-open my $tsv,"<",$updated_confidence;
-while(<$tsv>){
-    chomp($_);
-    my @tab=split("\t",$_);
-    $store{$tab[0]}{"lca_confidence"}=$tab[1];
-}
-close $tsv;
-
-
-# my %info_taxo;
+## Adding the taxonomy from metagenomes
+print "Reading lca information from metagenome contigs from $taxo_info\n";
 open my $tsv,"<",$taxo_info;
 while(<$tsv>){
     chomp($_);
@@ -67,6 +94,7 @@ while(<$tsv>){
 close $tsv;
 
 open my $s1,">",$out_file;
+print "Wrigin $out_file\n";
 open my $tsv,"<",$info_and_complex;
 while(<$tsv>){
     chomp($_);
@@ -149,7 +177,6 @@ while(<$tsv>){
         else{
             print "we remove $tab[0] because of restrictions\n";
         }
-        
     }
 }
 close $tsv;

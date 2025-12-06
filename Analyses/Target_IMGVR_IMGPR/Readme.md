@@ -39,7 +39,7 @@ The steps used to import the hits to IMG/VR and IMG/PR, along with the informati
 `import_to_duckdb.sh`
 
 ## Run PAM detection based on hits to IMG/VR and IMG/PR
-The corresponding scripts are available in the fodler "PAM_detection".  
+The corresponding scripts are available in the folder "PAM_detection".  
 
 First, we need to export the information for sequences upstream and downstream from spacer hits from DuckDB. Here for IMG/VR first, then for IMG/PR.  
 ```
@@ -47,22 +47,12 @@ COPY (SELECT crispr_array, upstream, downstream, COUNT(*) FROM (SELECT crispr_ar
 COPY (SELECT crispr_array, upstream, downstream, COUNT(*) FROM (SELECT crispr_array, cluster_id FROM spacer_hits_imgpr GROUP BY crispr_array, cluster_id) AS tmp, imgpr_hits_filt WHERE imgpr_hits_filt.cluster_id=tmp.cluster_id GROUP BY crispr_array, upstream, downstream ORDER BY crispr_array) TO 'PAM_viruses_plasmids/Neighborhood_for_pam_motif_all_imgpr.tsv' (HEADER, DELIMITER '\t');
 ```
 
-Next, we proceed with a de novo identification of potential pams in viruses based on sequence conservation  
-`./search_for_pam_motifs.pl -i Neighborhood_for_pam_motif_all_imgvr.tsv -o Motifs_from_neighborhood_all_imgvr.tsv`  
-Then we summarize these de novo motifs by array and by type  
-`./summarize_best_PAM_motifs.pl -i Motifs_from_neighborhood_all_imgvr.tsv -d /.../Data/Spacer_db/Array_info_filtered_for_db-Apr12-24.tsv -o Best_motif_by_repeat_imgvr.tsv -s Stat_PAM_predicted_by_type_imgvr.tsv`  
-We apply the same to the plasmids hits
-`./search_for_pam_motifs.pl -i Neighborhood_for_pam_motif_all_imgpr.tsv -o Motifs_from_neighborhood_all_imgpr.tsv`  
-and summarize these de novo motifs by array and by type
-`./summarize_best_PAM_motifs.pl -i Motifs_from_neighborhood_all_imgpr.tsv -d /.../Data/Spacer_db/Array_info_filtered_for_db-Apr12-24.tsv -o Best_motif_by_repeat_imgpr.tsv -s Stat_PAM_predicted_by_type_imgpr.tsv`  
+Next, we proceed with a de novo identification of conserved residues upstream and downstream of spacer hits 
+`./detect_conserved_positions.pl -d ../../../Data/`  
+Then, we evaluate whether these conserved residues are consistent with known PAMs (or variants of known PAMs), and assign each repeat to the most likely PAM (previously described or, when needed, newly identified)
+`./match_conservation_to_known_pams.pl -d ../../../Data/`  
+This will generate the files "Stat_motif_detection.tsv" and "Detailed_stats_motifs.tsv" used in Figure 3 and Supplementary Figure 12  
 
-Based on these hits and on known  motifs reported in the literature, we establish a file "manually_curated_PAMs_per_type.tsv" listing expected PAM(s) per CRISPR type (available in /.../Data/Additional_data/).  
-
-We can then combine all the de novo motif prediction in a single file, these will be potential PAMs that are different from the "canonical" / "common" ones identified above.    
-`./combine_potential_denovo.pl -d /.../Data`  
-
-Then from these lists of potential PAMs, we can look back at individual repeats and assign to motifs - we do that across VR and PR hits  
-`./assign_PAM_to_repeat.pl -d /.../Data/`  
 
 ## Get stats on the number of hits by spacer
 We can export the number of hits (i.e. number of distinct vOTUs or PTUs) hit by cluster, both for all sequences and for only high-quality UViGs or near-complete plasmids. This is done from the duckdb database, as described in `export_spacer_hit_stats.sh`  
@@ -74,12 +64,12 @@ The corresponding scripts are available in the folder "Target_coverage".
 First we need to extract the corresponding information from duckdb, using commands listed in `extract_spacer_info.sh`.  
 Next, we can use the scripts `get_uvig_coverage.pl` and `get_plasmid_coverage.pl` to calculate the coverage of individual targets (virus or plasmids) by spacers linked to individual repeats. And use `add_sp_info_to_coverage.pl` to add some more information about the type of hits. Note that this last script must be run twice, once for viruses as `./add_sp_info_to_coverage.pl run` and once for plasmids as `./add_sp_info_to_coverage.pl run -p`.  
 
-We can next use `get_uvig_coverage-bysample.pl` to get per-sample coverage for all pairs in which the overall coverage is at least 10% of the UViG or 1kb.
+We can also use `get_uvig_coverage-bysample.pl` to get per-sample coverage for all pairs in which the overall coverage is at least 10% of the UViG or 1kb.
 
 ## Import and process additional hits (i.e. hits with 2 and 3 mismatches) for relevant target-repeat pairs
 The corresponding scripts are available in the fodler "Beyond_near_exact". They rely on files generated in the "Target_coverage" folder, as well as the full results from `spacermap.pl`.  
 
-First, we generate a tsv file for import into duckdb that includes all spacer hits at 2 and 3 mismatches for high-quality targets with at least one repeat shoring 10 spacer hits or 200bp target coverage, with the script `collect_extra_hits.pl`. This script should be run twice, including once with the `-p` parameter to process this to plasmids. Note that this file is also pre-computed and provided as part of the "Data" package.  
+First, we generate a tsv file for import into duckdb that includes all spacer hits at 2 and 3 mismatches for high-quality targets with at least one repeat shoring 10 spacer hits or 200bp target coverage, with the script `collect_extra_hits.pl`. Note that this file is also pre-computed and provided as part of the "Data" package.  
 
 Next, we use the commands lised in `extract_relevant_extra_hits.sh` to create tsv files listing hits and spacer information for relevant virus-repeat pairs. This will generate the following files:  
 ```
@@ -89,7 +79,7 @@ All_hits_pr_hq_2-3mis.tsv
 All_spacers_pr_hq_2-3mis.tsv
 ```  
 
-Next, we use the scripts `get_uvig_to_repeat_profiles.pl` and `get_plasmid_to_repeat_profiles.pl` to generate tsv files with information about the number of hits at different mismatch levels for virus-repeat pairs.  
+Next, we use the scripts `get_uvig_to_repeat_profiles.pl` to generate tsv files with information about the number of hits at different mismatch levels for virus-repeat pairs.  
 
 ## Evaluate hits for phages with known hosts
 The corresponding scripts are available in the folder "Known_hosts".  
@@ -97,6 +87,8 @@ The corresponding scripts are available in the folder "Known_hosts".
 First, we use `export_hits.py` to extract information for relevant phages, using the list of phages with known hosts provided in "Data/Additional_data/". The command should be `python export_hits.py -u ../../../Data/Additional_data/Phages_with_known_hosts.tsv -d ../../Spacer_database/global_spacer.duckdb`.  
 
 Next, we use `./cross_reference_known_hosts_and_CRISPR_hits.pl run` to compare the taxonomy of the targeting microbe to the one for the host listed in the database.
+
+Finally, back in the "Beyond_near_exact" folder, we run `./add_virus_info_to_profiles.pl run` to add this information about known host to the targeting profile table.  
 
 ## Add coverage and mismatch information for viruses targeted by multiple taxa  
 This is based on a list of viruses identified as targeted by repeats assigned to distinct taxa (classes or above). This list can be generated based on scripts provided as part of the main figure 5, but is also provided as "Data/Additional_data/List_multiclass_uvigs_nohq.txt".  

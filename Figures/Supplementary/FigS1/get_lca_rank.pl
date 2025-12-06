@@ -13,7 +13,7 @@ if ($h==1 || $ARGV[0] eq ""){ # If asked for help or did not set up any argument
     die "\n";
 }
 
-my $repeat_file="Data/Spacer_db/Array_info_filtered_for_db-Nov1-24.tsv";
+my $repeat_file="Data/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
 my $array_file="Data/Additional_data/repeats_to_genome_contigs.tsv";
 my $genome_file="Data/Additional_data/all_genome_info.nometag.tsv";
 my $out_file_lca="lca_per_type_and_len.tsv";

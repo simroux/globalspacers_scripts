@@ -1,5 +1,4 @@
-# How-to - reconstruct panels of Fig. S14
-This supplementary figure requires the file "Summary_known_host_vs_hits.tsv", generated via the script `prepare_known_host_figure.pl` in the folder "Fitures/Main/Fig_4".  
-
-Then use `plot_known_hosts.R` to prepare the plot panels.
+# How-to - reconstruct Fig. S14
+First, we use the script `./subsample_coverage_n_spacer_for_figure.pl run` to get a subsample of data to plot.   
+Then `plot_coverage_vs_hits.R` can be used to prepare the plot.  
 
