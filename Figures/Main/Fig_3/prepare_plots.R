@@ -109,10 +109,9 @@ ggplot(df_pam_type) + geom_bar(aes(x=type_simple,y=value,fill=type_simple,alpha=
 ggsave("Panel_B_PAM.pdf",width=3,height=4)
 
 # Overall stats
-df_pam_type %>%
-  group_by(Expected) %>%
-  summarise(count=sum(Count)) %>%
-  mutate(percent=count/sum(count)*100) %>%
+df_pam_type_raw %>%
+  summarise(total=sum(total),no_motif=sum(no_conserved_pos)) %>%
+  mutate(percent=no_motif/total*100) %>%
   mutate(inverse=100-percent)
 
 
