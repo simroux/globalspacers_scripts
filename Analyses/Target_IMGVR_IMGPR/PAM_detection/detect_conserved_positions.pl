@@ -16,7 +16,7 @@ if ($h==1 || $ARGV[0] eq "" || 'd=s'=>\$data_folder){
 }
 
 
-my $in_file_arrays=$data_folder."/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
+my $in_file_arrays=$data_folder."/Spacer_db/Array_info_filtered_for_db-Apr23-26.tsv";
 my $file_nei="Neighborhood_for_pam_motif_all_imgvr.tsv";
 my $file_nei_pr="Neighborhood_for_pam_motif_all_imgpr.tsv";
 my $out_file="Conserved_positions_neighborhoods.tsv";

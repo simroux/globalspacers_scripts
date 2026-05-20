@@ -17,7 +17,7 @@ if ($h==1 || $ARGV[0] eq "" || 'd=s'=>\$data_folder){
 
 
 my $file_ref_pam=$data_folder."/Additional_data/manually_curated_PAMs_per_type.tsv";
-my $in_file_arrays=$data_folder."/Spacer_db/Array_info_filtered_for_db-Oct24-25.tsv";
+my $in_file_arrays=$data_folder."/Spacer_db/Array_info_filtered_for_db-Apr23-26.tsv";
 my $in_file_cons="Conserved_positions_neighborhoods.tsv";
 
 my $log_extra="pam_prediction.log";
