@@ -5,9 +5,8 @@ This folder includes scripts used to prepare the repeat sequence database. The f
 - `python check_repeat_complexity.py`: read a fasta file of clustered repeats, and flag sequences of low complexity
 - `./filter_restriction_and_quality.pl`: process the full list of repeats, adjust LCA confidence when needed, add LCA information from metagenome contigs, and output an updated list
 - `./reassign_crispr_type.pl`: re-run repeatType on the selected repeats, and update the predicted CRISPR type in the list.
-XX
-ADD CAS DETECTION
-XX
+- `./link_cas_prediction_to_repeat.pl`: process the CRISPRCasTyper results to link individual repeats to neighboring Cas loci, will generate the file "cas_by_repeat_cluster"
+- `./reassign_crispr_type_with_cas.pl`: clean up and integrate the Cas-based CRISPR type predictions to the repeat cluster table, will generate "Array_info_filtered_for_db-updated_type_and_cas.tsv"
 
 
 The final file generated corresponds to "Array_info_filtered_for_db-Apr23-26.tsv

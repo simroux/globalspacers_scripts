@@ -56,12 +56,12 @@ while(<$tsv>){
 	}
 	$check_c{$contig}=1;
 	$info_repeat{$repeat}{"contig"}=$contig;
-      $info_repeat{$repeat}{"consensus"}=$tab[4];
-      $info_repeat{$repeat}{"trusted"}=$tab[11];
+	$info_repeat{$repeat}{"consensus"}=$tab[4];
+	$info_repeat{$repeat}{"trusted"}=$tab[11];
 	$info_repeat{$repeat}{"n_repeat"}=$tab[5];
-      if ($tab[14]>=0.8){ ### NOTE - 0.8 is totally arbitrary for now, but it's to assign a type which is "fine" for now (i.e. it does not impact the repeats themselves), default seems to be 0.75 but unclear why some with 0.75 get assigned and other don't
-            $info_repeat{$tab[1]}{"type"}=$tab[13];
-      }
+	if ($tab[14]>=0.8){ ### NOTE - 0.8 is totally arbitrary for now, but it's to assign a type which is "fine" for now (i.e. it does not impact the repeats themselves), default seems to be 0.75 but unclear why some with 0.75 get assigned and other don't
+		$info_repeat{$tab[1]}{"type"}=$tab[13];
+	}
 	else{
 		$info_repeat{$tab[1]}{"type"}="Unknown";
 	}
